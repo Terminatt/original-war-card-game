@@ -1,0 +1,84 @@
+html,
+body {
+  margin: 0px;
+  height: 100%;
+  width: 100%;
+}
+h1 {
+  margin: 0;
+}
+@font-face {
+  font-family: "original_war_-_zoneregular";
+  src: url("ow-webfont.woff2") format("woff2"),
+    url("ow-webfont.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+.app {
+  display: flex;
+  flex-wrap: wrap;
+  height: 100%;
+}
+.gameContainer {
+  width: 100%;
+  height: 860px;
+
+  background-image: url("../img/background/menu-main.jpg");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+
+  position: relative;
+}
+.gameContainer__mainMenu {
+  width: 320px;
+  height: 450px;
+
+  padding-top: 3px;
+  padding-bottom: 7px;
+  padding-left: 3px;
+  padding-right: 7px;
+
+  background-color: #8c8663;
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+  margin: -160px 0 0 -165px;
+}
+.gameConteiner__mainMenu--midMostBorder {
+  width: 320px;
+  height: 450px;
+  background-color: white;
+}
+.menuContainer {
+  width: 25%;
+  height: 100%;
+}
+.menuContainer__navbar {
+  margin: 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  min-height: 10%;
+  font-family: "original_war_-_zoneregular";
+  color: red;
+  background-image: linear-gradient(
+    to right,
+    #0e4a02,
+    #2f7008,
+    #53980f,
+    #7bc113,
+    #a8eb12
+  );
+}
+.menuContainer__navbar--header {
+  width: 75%;
+}
+.border {
+  border-style: solid;
+  border-width: 2px;
+  border-color: black;
+  border-radius: 10px;
+}
