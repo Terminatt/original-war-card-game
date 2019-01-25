@@ -37,7 +37,12 @@ h1 {
   padding-left: 3px;
   padding-right: 7px;
 
-  background-color: #8c8663;
+  background: rgba(0, 0, 0, 0.5);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
 
   position: absolute;
   top: 50%;
@@ -45,11 +50,33 @@ h1 {
 
   margin: -160px 0 0 -165px;
 }
-.gameConteiner__mainMenu--midMostBorder {
-  width: 320px;
-  height: 450px;
-  background-color: #000000;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8' viewBox='0 0 8 8'%3E%3Cg fill='%238c8663' fill-opacity='0.57'%3E%3Cpath fill-rule='evenodd' d='M0 0h4v4H0V0zm4 4h4v4H4V4z'/%3E%3C/g%3E%3C/svg%3E");
+.gameContainer__mainMenu--midMostBorder {
+  width: 300px;
+  height: 430px;
+
+  
+  background-color: #8c8663;
+
+}
+.gameContainer__input {
+  display: block;
+
+  width: 280px;
+  height: 40px;
+
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 20px;
+  
+  background-color: #E7DFD6;
+}
+.gameContainer__input:active {
+  animation-name: button-click;
+  animation-duration: 0.1s;
+  animation-fill-mode: forwards;
+}
+.gameContainer__input:focus {
+  outline: none;
 }
 .menuContainer {
   width: 25%;
@@ -81,4 +108,16 @@ h1 {
   border-width: 2px;
   border-color: black;
   border-radius: 10px;
+}
+
+/* ##### not applied but worth noting down #####
+ background-color: #000000;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8' viewBox='0 0 8 8'%3E%3Cg fill='%238c8663' fill-opacity='0.57'%3E%3Cpath fill-rule='evenodd' d='M0 0h4v4H0V0zm4 4h4v4H4V4z'/%3E%3C/g%3E%3C/svg%3E");
+*/
+
+/*############### Animations ############### */
+@keyframes button-click {
+  to {
+    transform: translateY(5px);
+  }
 }
