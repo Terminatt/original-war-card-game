@@ -1,0 +1,19 @@
+{
+  "name": "original-war-card-game",
+  "version": "1.0.0",
+  "description": "A fan made simple card game based on Original War universe",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Terminatt/original-war-card-game.git"
+  },
+  "author": "Ernest Rudnicki",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Terminatt/original-war-card-game/issues"
+  },
+  "homepage": "https://github.com/Terminatt/original-war-card-game#readme"
+}
