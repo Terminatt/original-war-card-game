@@ -1,3 +1,4 @@
+/*############### HTML TAGS ############### */
 html,
 body {
   margin: 0px;
@@ -7,13 +8,7 @@ body {
 h1 {
   margin: 0;
 }
-@font-face {
-  font-family: "original_war_-_zoneregular";
-  src: url("ow-webfont.woff2") format("woff2"),
-    url("ow-webfont.woff") format("woff");
-  font-weight: normal;
-  font-style: normal;
-}
+/*############### ClASSES ############### */
 .app {
   display: flex;
   flex-wrap: wrap;
@@ -43,37 +38,37 @@ h1 {
   justify-content: center;
   align-items: center;
 
-
   position: absolute;
   top: 50%;
   left: 50%;
 
   margin: -160px 0 0 -165px;
 }
+.gameContainer__mainMenu--disabled {
+  display: none !important;
+}
 .gameContainer__mainMenu--midMostBorder {
   width: 300px;
   height: 430px;
 
-  
   background-color: #8c8663;
-
 }
 .gameContainer__input {
   display: block;
+  font-family: "original_war_menufont";
+  font-size: 1.2rem;
 
   width: 280px;
   height: 40px;
 
   margin-left: auto;
   margin-right: auto;
-  margin-top: 20px;
-  
-  background-color: #E7DFD6;
+  margin-top: 25px;
+
+  background-color: #e7dfd6;
 }
 .gameContainer__input:active {
-  animation-name: button-click;
-  animation-duration: 0.1s;
-  animation-fill-mode: forwards;
+  transform: translateY(5px);
 }
 .gameContainer__input:focus {
   outline: none;
@@ -109,14 +104,26 @@ h1 {
   border-color: black;
   border-radius: 10px;
 }
-
 /* ##### not applied but worth noting down #####
  background-color: #000000;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8' viewBox='0 0 8 8'%3E%3Cg fill='%238c8663' fill-opacity='0.57'%3E%3Cpath fill-rule='evenodd' d='M0 0h4v4H0V0zm4 4h4v4H4V4z'/%3E%3C/g%3E%3C/svg%3E");
 */
-
-/*############### Animations ############### */
-@keyframes button-click {
+/*############### FONTS ############### */
+@font-face {
+  font-family: "original_war_-_zoneregular";
+  src: url("ow-webfont.woff2") format("woff2"),
+    url("ow-webfont.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "original_war_menufont";
+  src: url("./bank-gothic-light-bt.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+/*############### ANIMATIONS ############### */
+@keyframes menu-fade-away {
   to {
     transform: translateY(5px);
   }
