@@ -15,5 +15,9 @@
   "bugs": {
     "url": "https://github.com/Terminatt/original-war-card-game/issues"
   },
-  "homepage": "https://github.com/Terminatt/original-war-card-game#readme"
+  "homepage": "https://github.com/Terminatt/original-war-card-game#readme",
+  "devDependencies": {
+    "browser-sync": "^2.26.3",
+    "gulp": "^4.0.0"
+  }
 }

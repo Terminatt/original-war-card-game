@@ -2,7 +2,7 @@
 html,
 body {
   margin: 0px;
-  height: 100vh;
+  height: 100%;
   width: 100%;
 }
 h1 {
@@ -12,7 +12,7 @@ h1 {
 .app {
   display: flex;
   flex-wrap: wrap;
-  height: 100vh;
+  height: 100%;
 }
 .gameContainer {
   width: 100%;
@@ -44,10 +44,15 @@ h1 {
 
   margin: -160px 0 0 -165px;
 }
-.gameContainer__mainMenu--disabled {
-  display: none !important;
+.gameContainer__mainMenu--fade {
+  animation-name: menu-fade-away;
+  animation-duration: 2s;
+  animation-fill-mode: forwards;
 }
-.gameContainer__mainMenu--midMostBorder {
+.gameContainer__mainMenu--invisible {
+  display: none;
+}
+.gameContainer__midMostContainerBorder {
   width: 300px;
   height: 430px;
 
@@ -72,6 +77,19 @@ h1 {
 }
 .gameContainer__input:focus {
   outline: none;
+}
+.gameContainer__deck {
+  background-color: black;
+  width: 60%;
+  height: 60%;
+  opacity: 0.5;
+
+  display: flex;
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -40%);
 }
 .menuContainer {
   width: 25%;
@@ -125,6 +143,6 @@ h1 {
 /*############### ANIMATIONS ############### */
 @keyframes menu-fade-away {
   to {
-    transform: translateY(5px);
+    transform: scale(0);
   }
 }
