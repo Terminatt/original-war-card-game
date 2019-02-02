@@ -4,6 +4,7 @@ body {
   margin: 0px;
   height: 100%;
   width: 100%;
+  position: relative;
 }
 h1 {
   margin: 0;
@@ -17,16 +18,13 @@ h1 {
 .gameContainer {
   width: 100%;
 
-  background-image: url("../img/background/menu-main.jpg");
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
-
   position: relative;
 }
 .gameContainer__mainMenu {
   width: 320px;
   height: 450px;
 
+  z-index: 2;
   padding-top: 3px;
   padding-bottom: 7px;
   padding-left: 3px;
@@ -91,6 +89,9 @@ h1 {
   left: 50%;
   transform: translate(-50%, -40%);
 }
+.gameContainer__deck--invisible {
+  display: none;
+}
 .menuContainer {
   width: 25%;
   height: 100%;
@@ -126,7 +127,24 @@ h1 {
  background-color: #000000;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8' viewBox='0 0 8 8'%3E%3Cg fill='%238c8663' fill-opacity='0.57'%3E%3Cpath fill-rule='evenodd' d='M0 0h4v4H0V0zm4 4h4v4H4V4z'/%3E%3C/g%3E%3C/svg%3E");
 */
-/*############### FONTS ############### */
+
+/*############### BACKGROUNDS ###############*/
+.backgroundFront, .backgroundRear {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+.backgroundFront {
+  background-image: url("../img/background/menu-main.jpg");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  z-index: 1;
+}
+.backgroundRear  {
+z-index: 0;
+}
+
+/*############### FONTS ###############*/
 @font-face {
   font-family: "original_war_-_zoneregular";
   src: url("ow-webfont.woff2") format("woff2"),
