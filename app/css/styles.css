@@ -42,14 +42,12 @@ h1 {
 
   margin: -160px 0 0 -165px;
 }
-.gameContainer__mainMenu--fade {
+.anFadeAway {
   animation-name: menu-fade-away;
   animation-duration: 2s;
   animation-fill-mode: forwards;
 }
-.gameContainer__mainMenu--invisible {
-  display: none;
-}
+
 .gameContainer__midMostContainerBorder {
   width: 300px;
   height: 430px;
@@ -76,20 +74,40 @@ h1 {
 .gameContainer__input:focus {
   outline: none;
 }
-.gameContainer__deck {
-  background-color: black;
-  width: 60%;
-  height: 60%;
-  opacity: 0.5;
+.gameContainer__deck, .gameContainer__transparentDeck {
+  width: 900px;
+  height: 600px;
+  z-index: 2;
 
   display: flex;
+  flex-wrap: wrap;
 
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -40%);
 }
-.gameContainer__deck--invisible {
+.gameContainer__card {
+  width: 150px;
+  height: 100px;
+  
+  cursor: pointer;
+
+  margin-top: 35px;
+  margin-left: 50px;
+
+  border-style: solid;
+  border-radius: 10px;
+  border-color: rgb(90, 0, 0);
+
+  background-color: rgb(90, 0, 0);
+  z-index: 4;
+}
+.gameContainer__transparentDeck {
+  background-color: black;
+  opacity: 0.5;
+}
+.invisible {
   display: none;
 }
 .menuContainer {
@@ -135,7 +153,7 @@ h1 {
   height: 100%;
 }
 .backgroundFront {
-  background-image: url("../img/background/menu-main.jpg");
+  background-image: url("../img/background/backgroundMain_01.jpg");
   background-repeat: no-repeat;
   background-size: 100% 100%;
   z-index: 1;
