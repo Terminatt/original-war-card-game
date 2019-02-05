@@ -12,7 +12,7 @@
 <body>
   <div class="app">
     <div class="gameContainer">
-      <div class="gameContainer__mainMenu invisible border">
+      <div class="gameContainer__mainMenu border">
         <div class="gameContainer__midMostContainerBorder border">
           <button class="gameContainer__input border">64 karty</button>
           <button class="gameContainer__input border">32 karty</button>
@@ -22,9 +22,9 @@
           <button class="gameContainer__input border">Najlepsi gracze</button>
         </div>
       </div>
-      <div class="gameContainer__transparentDeck">
+      <div class="gameContainer__transparentDeck invisible">
       </div>
-      <div class="gameContainer__deck">
+      <div class="gameContainer__deck invisible">
         <div class="gameContainer__card">
         </div>
         <div class="gameContainer__card">
@@ -61,8 +61,7 @@
     </div>
     <div class="backgroundFront"></div>
     <div class="backgroundRear"></div>
-    <script src="main.js">
-    </script>
+    <script data-main="./scripts/main.js" src="./scripts/require.js"></script>
 </body>
 
 </html>

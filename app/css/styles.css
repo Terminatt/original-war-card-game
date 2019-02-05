@@ -74,9 +74,10 @@ h1 {
 .gameContainer__input:focus {
   outline: none;
 }
-.gameContainer__deck, .gameContainer__transparentDeck {
+.gameContainer__deck,
+.gameContainer__transparentDeck {
   width: 900px;
-  height: 600px;
+  height: 500px;
   z-index: 2;
 
   display: flex;
@@ -90,7 +91,7 @@ h1 {
 .gameContainer__card {
   width: 150px;
   height: 100px;
-  
+
   cursor: pointer;
 
   margin-top: 35px;
@@ -147,7 +148,8 @@ h1 {
 */
 
 /*############### BACKGROUNDS ###############*/
-.backgroundFront, .backgroundRear {
+.backgroundFront,
+.backgroundRear {
   position: absolute;
   width: 100%;
   height: 100%;
@@ -158,8 +160,8 @@ h1 {
   background-size: 100% 100%;
   z-index: 1;
 }
-.backgroundRear  {
-z-index: 0;
+.backgroundRear {
+  z-index: 0;
 }
 
 /*############### FONTS ###############*/
@@ -180,5 +182,21 @@ z-index: 0;
 @keyframes menu-fade-away {
   to {
     transform: scale(0);
+  }
+}
+/*############### MEDIA QUERYS ############### */
+@media screen and (max-width: 1400px) {
+  .gameContainer__deck,
+  .gameContainer__transparentDeck {
+    width: 800px;
+    height: 550px;
+
+    transform: translate(-50%, -50%);
+  }
+  .gameContainer__card {
+    width: 130px;
+    height: 80px;
+
+    margin-left: 50px;
   }
 }
