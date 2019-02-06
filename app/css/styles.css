@@ -42,11 +42,6 @@ h1 {
 
   margin: -160px 0 0 -165px;
 }
-.anFadeAway {
-  animation-name: menu-fade-away;
-  animation-duration: 2s;
-  animation-fill-mode: forwards;
-}
 
 .gameContainer__midMostContainerBorder {
   width: 300px;
@@ -178,13 +173,41 @@ h1 {
   font-weight: normal;
   font-style: normal;
 }
-/*############### ANIMATIONS ############### */
-@keyframes menu-fade-away {
+
+/*############### ANIMATION CLASSES ###############*/
+.anFadeAway {
+  animation-name: exit-right;
+  animation-duration: 3s;
+  animation-fill-mode: forwards;
+}
+.anComeIn {
+  animation-name: zoom-in;
+  animation-duration: 2s;
+  animation-fill-mode: forwards;
+}
+/*############### ANIMATIONS ###############*/
+@keyframes exit-right {
+  20% {
+    opacity: 1;
+    transform: translate(-100px, 0);
+  }
+
   to {
-    transform: scale(0);
+    opacity: 0;
+    transform: translate(3000px, 0);
   }
 }
-/*############### MEDIA QUERYS ############### */
+@keyframes zoom-in {
+  from {
+    opacity: 0;
+    transform: scale(0.3, 0.3);
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+/*############### MEDIA QUERYS ###############*/
 @media screen and (max-width: 1400px) {
   .gameContainer__deck,
   .gameContainer__transparentDeck {

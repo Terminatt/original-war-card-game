@@ -1,1 +1,3 @@
-requirejs(["./scripts/game.js"], function(util) {});
+requirejs(["./scripts/app/game.js"], Game => {
+  Game.init();
+});
