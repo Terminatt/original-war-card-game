@@ -8,16 +8,29 @@ define(() => {
 
       btnCards_16.addEventListener("click", () => {
         const mainMenu = document.querySelector(".gameContainer__mainMenu");
-        // const deck = document.querySelector(".gameContainer__deck");
+        const deck = document.querySelector(".gameContainer__deck");
         const transparentDeck = document.querySelector(
           ".gameContainer__transparentDeck"
         );
 
         mainMenu.classList.add("anFadeAway");
+        this.asyncChangeClasses(
+          transparentDeck,
+          "invisible",
+          "anComeIn",
+          2000
+        ).then(() => {
+          this.asyncChangeClasses(deck, "invisible", "anComeIn", 2000);
+        });
+      });
+    },
+    asyncChangeClasses: function(element, classToRemove, classToAdd, time) {
+      return new Promise(function(resolve) {
         setTimeout(() => {
-          transparentDeck.classList.remove("invisible");
-          transparentDeck.classList.add("anComeIn");
-        }, 2000);
+          element.classList.remove(classToRemove);
+          element.classList.add(classToAdd);
+          resolve();
+        }, time);
       });
     }
   };
