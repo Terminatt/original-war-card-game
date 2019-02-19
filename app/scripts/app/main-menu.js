@@ -14,17 +14,17 @@ define(() => {
         );
 
         mainMenu.classList.add("anFadeAway");
-        this.asyncChangeClasses(
+        this.stackAnimation(
           transparentDeck,
           "invisible",
           "anComeIn",
           2000
         ).then(() => {
-          this.asyncChangeClasses(deck, "invisible", "anComeIn", 2000);
+          this.stackAnimation(deck, "invisible", "anComeIn", 2000);
         });
       });
     },
-    asyncChangeClasses: function(element, classToRemove, classToAdd, time) {
+    stackAnimation: function(element, classToRemove, classToAdd, time) {
       return new Promise(function(resolve) {
         setTimeout(() => {
           element.classList.remove(classToRemove);
