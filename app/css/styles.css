@@ -159,14 +159,14 @@ h1 {
 /*############### FONTS ###############*/
 @font-face {
   font-family: "original_war_-_zoneregular";
-  src: url("ow-webfont.woff2") format("woff2"),
-    url("ow-webfont.woff") format("woff");
+  src: url("./fonts/ow-webfont.woff2") format("woff2"),
+    url("./fonts/ow-webfont.woff") format("woff");
   font-weight: normal;
   font-style: normal;
 }
 @font-face {
   font-family: "original_war_menufont";
-  src: url("./bank-gothic-light-bt.woff") format("woff");
+  src: url("./fonts/bank-gothic-light-bt.woff") format("woff");
   font-weight: normal;
   font-style: normal;
 }

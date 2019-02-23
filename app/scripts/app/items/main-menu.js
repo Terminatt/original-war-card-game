@@ -1,5 +1,6 @@
 define(() => {
   return {
+    state: "inMenu",
     attachListeners: function() {
       this.attachListenerBtn16();
     },
@@ -20,10 +21,13 @@ define(() => {
           "anComeIn",
           2000
         ).then(() => {
-          this.stackAnimation(deck, "invisible", "anComeIn", 2000);
+          this.stackAnimation(deck, "invisible", "anComeIn", 2000).then(() => {
+            this.state = "notInMenu";
+          });
         });
       });
     },
+
     stackAnimation: function(element, classToRemove, classToAdd, time) {
       return new Promise(function(resolve) {
         setTimeout(() => {
