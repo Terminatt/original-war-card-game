@@ -202,21 +202,9 @@ h1 {
     width: 0;
     height: 0;
   }
-  10% {
-    width: 0;
-    height: 0;
-  }
-  30% {
-    width: 20%;
-    height: 20%;
-  }
-  60% {
-    width: 40%;
-    height: 40%;
-  }
   to {
-    width: 45%;
-    height: 80%;
+    width: 60%;
+    height: 75%;
   }
 }
 @keyframes handing-out-card {
