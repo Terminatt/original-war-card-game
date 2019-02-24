@@ -3,14 +3,14 @@ define(["./items/card.js", "./items/animations.js"], (Card, Animation) => {
     state: "loading",
     gameMode: "",
 
-    init: function () {
+    init: function() {
       this.listenToStateChange();
       this.attachListeners();
     },
-    attachListeners: function () {
+    attachListeners: function() {
       this.attachListenerBtn16();
     },
-    attachListenerBtn16: function () {
+    attachListenerBtn16: function() {
       const btnCards_16 = document.querySelector("#btnCards_16");
 
       btnCards_16.addEventListener("click", () => {
@@ -19,29 +19,47 @@ define(["./items/card.js", "./items/animations.js"], (Card, Animation) => {
         this.animate(mainMenu, "anFadeAway", "menuHiding");
       });
     },
-    addListenerToAnimEnd: function (element, stateChange) {
+    addListenerToAnimEnd: function(element, stateChange) {
       element.addEventListener("animationend", () => {
-        element.removeEventListener("animationend", () => {
-          this.state = stateChange;
-        });
-      })
+        this.state = stateChange;
+        console.log(element);
+        element.removeEventListener("animationend", () => {});
+      });
     },
-    animate: function (element, cssClassAnimationName, stateChange) {
+    animate: function(element, cssClassAnimationName, stateChange) {
       this.addListenerToAnimEnd(element, stateChange);
       Animation.addAnimation(element, cssClassAnimationName);
     },
-    animateWithClassRemove: function (element, cssClassAnimationName, cssClassToRemove, stateChange) {
+    animateWithClassRemove: function(
+      element,
+      cssClassToRemove,
+      cssClassAnimationName,
+      stateChange
+    ) {
       this.addListenerToAnimEnd(element, stateChange);
-      Animation.addAnimationWithClassDelete(element, cssClassToRemove, cssClassAnimationName);
+      Animation.addAnimationWithClassDelete(
+        element,
+        cssClassToRemove,
+        cssClassAnimationName
+      );
     },
-    listenToStateChange: function () {
+    listenToStateChange: function() {
       setInterval(() => {
         switch (this.state) {
           case "menuHiding":
-            const transparentDeck = document.querySelector(".gameContainer__transparentDeck");
-            this.animateWithClassRemove(transparentDeck, "invisible", "anComeIn", "transparentDeckLoaded");
+            console.log(this.state);
+            const transparentDeck = document.querySelector(
+              ".gameContainer__transparentDeck"
+            );
+            this.animateWithClassRemove(
+              transparentDeck,
+              "invisible",
+              "anComeIn",
+              "transparentDeckLoaded"
+            );
             break;
           case "transparentDeckLoaded":
+            console.log(this.state);
             const deck = document.querySelector(".gameContainer__deck");
             deck.classList.remove("invisible");
             this.state = "deckLoaded";
@@ -53,7 +71,7 @@ define(["./items/card.js", "./items/animations.js"], (Card, Animation) => {
             //TODO fill in for loaded
             break;
         }
-      }, 1)
+      }, 1);
     }
   };
 });
