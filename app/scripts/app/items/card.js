@@ -2,10 +2,20 @@ define(() => {
   return {
     createCard: function() {
       let cardDomElement = document.createElement("DIV");
-      card.classList.add("gameContainer__card");
+      cardDomElement.classList.add("gameContainer__card");
+      cardDomElement.classList.add("hidden");
+
       return {
-        domElement: card,
-        cardState: "hiding"
+        domElement: cardDomElement,
+        cardState: "hiding",
+        id: null,
+        image: null,
+        changeCardState: function(newState) {
+          this.cardState = newState;
+        },
+        generateRandomImage: function(imageNames) {
+          this.image = imageNames[Math.floor(Math.random * imageNames.length)];
+        }
       };
     }
   };

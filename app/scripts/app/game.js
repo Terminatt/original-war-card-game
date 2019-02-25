@@ -1,7 +1,9 @@
 define(["./items/card.js", "./items/animations.js"], (Card, Animation) => {
   return {
     state: "loading",
-    gameMode: "",
+    cards: [],
+    cardAmount: 0,
+    loadedCards: 0,
 
     init: function() {
       this.listenToStateChange();
@@ -15,14 +17,13 @@ define(["./items/card.js", "./items/animations.js"], (Card, Animation) => {
 
       btnCards_16.addEventListener("click", () => {
         const mainMenu = document.querySelector(".gameContainer__mainMenu");
-        this.gameMode = "16";
+        this.cardAmount = 16;
         this.animate(mainMenu, "anFadeAway", "menuHiding");
       });
     },
     addListenerToAnimEnd: function(element, stateChange) {
       element.addEventListener("animationend", () => {
         this.state = stateChange;
-        console.log(element);
         element.removeEventListener("animationend", () => {});
       });
     },
@@ -47,31 +48,82 @@ define(["./items/card.js", "./items/animations.js"], (Card, Animation) => {
       setInterval(() => {
         switch (this.state) {
           case "menuHiding":
-            console.log(this.state);
-            const transparentDeck = document.querySelector(
-              ".gameContainer__transparentDeck"
-            );
-            this.animateWithClassRemove(
-              transparentDeck,
-              "invisible",
-              "anComeIn",
-              "transparentDeckLoaded"
-            );
+            this.onMenuHiding();
             break;
           case "transparentDeckLoaded":
-            console.log(this.state);
-            const deck = document.querySelector(".gameContainer__deck");
-            deck.classList.remove("invisible");
-            this.state = "deckLoaded";
+            this.onTransparentDeckLoaded();
             break;
           case "deckLoaded":
-            //TODO fill in for cards
+            this.onDeckLoaded();
+            break;
+          case "cardReady":
+            this.onCardReady();
             break;
           case "loaded":
-            //TODO fill in for loaded
             break;
         }
       }, 1);
+    },
+    onMenuHiding: function() {
+      const transparentDeck = document.querySelector(
+        ".gameContainer__transparentDeck"
+      );
+      this.animateWithClassRemove(
+        transparentDeck,
+        "invisible",
+        "anComeIn",
+        "transparentDeckLoaded"
+      );
+    },
+    onTransparentDeckLoaded: function() {
+      const deck = document.querySelector(".gameContainer__deck");
+      deck.classList.remove("invisible");
+      this.state = "deckLoaded";
+    },
+    onDeckLoaded: function() {
+      this.createCards(this.cardAmount);
+      //this.cloneCards(this.cards);
+      this.state = "cardReady";
+    },
+    onCardReady: function() {
+      if (this.loadedCards < this.cardAmount) {
+        const index = this.loadedCards;
+        let card = this.cards[index];
+        this.state = "cardLoading";
+        this.animateWithClassRemove(
+          card.domElement,
+          "hidden",
+          "anHandingOutCard",
+          "cardReady"
+        );
+        this.loadedCards++;
+      } else {
+        this.state = "loaded";
+      }
+    },
+    createCards: function(amount) {
+      // the amount must be divided by two so that only 8/16/32 unique cards will be created
+      for (let i = 0; i < amount; i++) {
+        let card = Card.createCard();
+        this.appendToDeck(card.domElement);
+
+        card.domElement.addEventListener("click", () => {
+          card.changeCardState("revealed");
+        });
+
+        this.cards.push(card);
+      }
+    },
+    cloneCards: function(cards) {
+      const length = cards.length;
+      for (let i = 0; i < length; i++) {
+        cards.push(cards[i]);
+      }
+    },
+    appendToDeck: function(cardDomElement) {
+      document
+        .querySelector(".gameContainer__deck")
+        .appendChild(cardDomElement);
     }
   };
 });

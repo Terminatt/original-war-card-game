@@ -108,6 +108,9 @@ h1 {
 .invisible {
   display: none;
 }
+.hidden {
+  visibility: hidden;
+}
 .menuContainer {
   width: 25%;
   height: 100%;
@@ -130,9 +133,7 @@ h1 {
     #a8eb12
   );
 }
-.menuContainer__navbar--header {
-  width: 75%;
-}
+
 .border {
   border-style: solid;
   border-width: 2px;
@@ -183,7 +184,7 @@ h1 {
 }
 .anHandingOutCard {
   animation-name: handing-out-card;
-  animation-duration: 2s;
+  animation-duration: 0.5s;
 }
 /*############### ANIMATIONS ###############*/
 @keyframes exit-right {
