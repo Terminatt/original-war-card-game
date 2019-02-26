@@ -16,7 +16,7 @@ define(["./items/card.js", "./items/animations.js"], (Card, Animation) => {
       const btnCards_16 = document.querySelector("#btnCards_16");
 
       btnCards_16.addEventListener("click", () => {
-        const mainMenu = document.querySelector(".mainMenu");
+        const mainMenu = document.querySelector(".gameContainer__mainMenu");
         this.cardAmount = 16;
         this.animate(mainMenu, "anFadeAway", "menuHiding");
       });
@@ -45,6 +45,8 @@ define(["./items/card.js", "./items/animations.js"], (Card, Animation) => {
       );
     },
     listenToStateChange: function() {
+      let loadedCards = 0;
+
       setInterval(() => {
         switch (this.state) {
           case "menuHiding":
@@ -65,17 +67,19 @@ define(["./items/card.js", "./items/animations.js"], (Card, Animation) => {
       }, 1);
     },
     onMenuHiding: function() {
-      const transparentDeck = document.querySelector(".transparentDeck");
+      const transparentDeck = document.querySelector(
+        ".gameContainer__transparentDeck"
+      );
       this.animateWithClassRemove(
         transparentDeck,
-        "invisible",
+        "gameContainer__transparentDeck--invisible",
         "anComeIn",
         "transparentDeckLoaded"
       );
     },
     onTransparentDeckLoaded: function() {
-      const deck = document.querySelector(".deck");
-      deck.classList.remove("invisible");
+      const deck = document.querySelector(".gameContainer__deck");
+      deck.classList.remove("gameContainer__deck--invisible");
       this.state = "deckLoaded";
     },
     onDeckLoaded: function() {
@@ -88,9 +92,10 @@ define(["./items/card.js", "./items/animations.js"], (Card, Animation) => {
         const index = this.loadedCards;
         let card = this.cards[index];
         this.state = "cardLoading";
+
         this.animateWithClassRemove(
           card.domElement,
-          "hidden",
+          "deck__card--hidden",
           "anHandingOutCard",
           "cardReady"
         );
@@ -119,7 +124,9 @@ define(["./items/card.js", "./items/animations.js"], (Card, Animation) => {
       }
     },
     appendToDeck: function(cardDomElement) {
-      document.querySelector(".deck").appendChild(cardDomElement);
+      document
+        .querySelector(".gameContainer__deck")
+        .appendChild(cardDomElement);
     }
   };
 });

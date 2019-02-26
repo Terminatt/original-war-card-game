@@ -22,7 +22,7 @@ h1 {
 
   overflow: hidden;
 }
-.mainMenu {
+.gameContainer__mainMenu {
   width: 320px;
   height: 450px;
 
@@ -44,14 +44,26 @@ h1 {
 
   margin: -160px 0 0 -165px;
 }
+.gameContainer__mainMenu--border {
+  border-style: solid;
+  border-width: 2px;
+  border-color: black;
+  border-radius: 10px;
+}
 
-.midMostContainerBorder {
+.midMostContainer {
   width: 300px;
   height: 430px;
 
   background-color: #8c8663;
 }
-.input {
+.midMostContainer--border {
+  border-style: solid;
+  border-width: 2px;
+  border-color: black;
+  border-radius: 10px;
+}
+.midMostContainer__btn {
   display: block;
   font-family: "original_war_menufont";
   font-size: 1.2rem;
@@ -64,15 +76,20 @@ h1 {
   margin-top: 25px;
 
   background-color: #e7dfd6;
+
+  border-style: solid;
+  border-width: 2px;
+  border-color: black;
+  border-radius: 10px;
 }
-.input:active {
+.midMostContainer__btn:active {
   transform: translateY(5px);
 }
-.input:focus {
+.midMostContainer__btn:focus {
   outline: none;
 }
-.deck,
-.transparentDeck {
+.gameContainer__deck,
+.gameContainer__transparentDeck {
   width: 45%;
   height: 80%;
   z-index: 2;
@@ -85,7 +102,11 @@ h1 {
   left: 50%;
   transform: translate(-50%, -40%);
 }
-.card {
+.gameContainer__transparentDeck {
+  background-color: black;
+  opacity: 0.5;
+}
+.deck__card {
   width: 150px;
   height: 100px;
 
@@ -101,14 +122,11 @@ h1 {
   background-color: rgb(90, 0, 0);
   z-index: 4;
 }
-.transparentDeck {
-  background-color: black;
-  opacity: 0.5;
-}
-.invisible {
+.gameContainer__transparentDeck--invisible,
+.gameContainer__deck--invisible {
   display: none;
 }
-.hidden {
+.deck__card--hidden {
   visibility: hidden;
 }
 .menuContainer {
@@ -132,13 +150,6 @@ h1 {
     #7bc113,
     #a8eb12
   );
-}
-
-.border {
-  border-style: solid;
-  border-width: 2px;
-  border-color: black;
-  border-radius: 10px;
 }
 /*############### BACKGROUNDS ###############*/
 .backgroundFront,
@@ -218,14 +229,14 @@ h1 {
 }
 /*############### MEDIA QUERYS ###############*/
 @media screen and (max-width: 1400px) {
-  .deck,
-  .transparentDeck {
+  .gameContainer__deck,
+  .gameContainer__transparentDeck {
     width: 60%;
     height: 75%;
 
     transform: translate(-50%, -50%);
   }
-  .card {
+  .deck__card {
     width: 130px;
     height: 80px;
 

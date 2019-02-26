@@ -2,8 +2,8 @@ define(() => {
   return {
     createCard: function() {
       let cardDomElement = document.createElement("DIV");
-      cardDomElement.classList.add("card");
-      cardDomElement.classList.add("hidden");
+      cardDomElement.classList.add("deck__card");
+      cardDomElement.classList.add("deck__card--hidden");
 
       return {
         domElement: cardDomElement,
