@@ -22,7 +22,7 @@ h1 {
 
   overflow: hidden;
 }
-.gameContainer__mainMenu {
+.mainMenu {
   width: 320px;
   height: 450px;
 
@@ -45,13 +45,13 @@ h1 {
   margin: -160px 0 0 -165px;
 }
 
-.gameContainer__midMostContainerBorder {
+.midMostContainerBorder {
   width: 300px;
   height: 430px;
 
   background-color: #8c8663;
 }
-.gameContainer__input {
+.input {
   display: block;
   font-family: "original_war_menufont";
   font-size: 1.2rem;
@@ -65,14 +65,14 @@ h1 {
 
   background-color: #e7dfd6;
 }
-.gameContainer__input:active {
+.input:active {
   transform: translateY(5px);
 }
-.gameContainer__input:focus {
+.input:focus {
   outline: none;
 }
-.gameContainer__deck,
-.gameContainer__transparentDeck {
+.deck,
+.transparentDeck {
   width: 45%;
   height: 80%;
   z-index: 2;
@@ -85,7 +85,7 @@ h1 {
   left: 50%;
   transform: translate(-50%, -40%);
 }
-.gameContainer__card {
+.card {
   width: 150px;
   height: 100px;
 
@@ -101,7 +101,7 @@ h1 {
   background-color: rgb(90, 0, 0);
   z-index: 4;
 }
-.gameContainer__transparentDeck {
+.transparentDeck {
   background-color: black;
   opacity: 0.5;
 }
@@ -115,7 +115,7 @@ h1 {
   width: 25%;
   height: 100%;
 }
-.menuContainer__navbar {
+.navbar {
   margin: 0px;
   display: flex;
   justify-content: center;
@@ -218,14 +218,14 @@ h1 {
 }
 /*############### MEDIA QUERYS ###############*/
 @media screen and (max-width: 1400px) {
-  .gameContainer__deck,
-  .gameContainer__transparentDeck {
+  .deck,
+  .transparentDeck {
     width: 60%;
     height: 75%;
 
     transform: translate(-50%, -50%);
   }
-  .gameContainer__card {
+  .card {
     width: 130px;
     height: 80px;
 

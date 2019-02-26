@@ -2,7 +2,7 @@ define(() => {
   return {
     createCard: function() {
       let cardDomElement = document.createElement("DIV");
-      cardDomElement.classList.add("gameContainer__card");
+      cardDomElement.classList.add("card");
       cardDomElement.classList.add("hidden");
 
       return {
