@@ -5,14 +5,14 @@ define(["./items/card.js", "./items/animations.js"], (Card, Animation) => {
     cardAmount: 0,
     loadedCards: 0,
 
-    init: function() {
+    init: function () {
       this.listenToStateChange();
       this.attachListeners();
     },
-    attachListeners: function() {
+    attachListeners: function () {
       this.attachListenerBtn16();
     },
-    attachListenerBtn16: function() {
+    attachListenerBtn16: function () {
       const btnCards_16 = document.querySelector("#btnCards_16");
 
       btnCards_16.addEventListener("click", () => {
@@ -21,17 +21,17 @@ define(["./items/card.js", "./items/animations.js"], (Card, Animation) => {
         this.animate(mainMenu, "anFadeAway", "menuHiding");
       });
     },
-    addListenerToAnimEnd: function(element, stateChange) {
+    addListenerToAnimEnd: function (element, stateChange) {
       element.addEventListener("animationend", () => {
         this.state = stateChange;
-        element.removeEventListener("animationend", () => {});
+        element.removeEventListener("animationend", () => { });
       });
     },
-    animate: function(element, cssClassAnimationName, stateChange) {
+    animate: function (element, cssClassAnimationName, stateChange) {
       this.addListenerToAnimEnd(element, stateChange);
       Animation.addAnimation(element, cssClassAnimationName);
     },
-    animateWithClassRemove: function(
+    animateWithClassRemove: function (
       element,
       cssClassToRemove,
       cssClassAnimationName,
@@ -44,7 +44,7 @@ define(["./items/card.js", "./items/animations.js"], (Card, Animation) => {
         cssClassAnimationName
       );
     },
-    listenToStateChange: function() {
+    listenToStateChange: function () {
       let loadedCards = 0;
 
       setInterval(() => {
@@ -66,7 +66,7 @@ define(["./items/card.js", "./items/animations.js"], (Card, Animation) => {
         }
       }, 1);
     },
-    onMenuHiding: function() {
+    onMenuHiding: function () {
       const transparentDeck = document.querySelector(
         ".gameContainer__transparentDeck"
       );
@@ -77,17 +77,17 @@ define(["./items/card.js", "./items/animations.js"], (Card, Animation) => {
         "transparentDeckLoaded"
       );
     },
-    onTransparentDeckLoaded: function() {
+    onTransparentDeckLoaded: function () {
       const deck = document.querySelector(".gameContainer__deck");
       deck.classList.remove("gameContainer__deck--invisible");
       this.state = "deckLoaded";
     },
-    onDeckLoaded: function() {
+    onDeckLoaded: function () {
       this.createCards(this.cardAmount);
       //this.cloneCards(this.cards);
       this.state = "cardReady";
     },
-    onCardReady: function() {
+    onCardReady: function () {
       if (this.loadedCards < this.cardAmount) {
         const index = this.loadedCards;
         let card = this.cards[index];
@@ -104,26 +104,22 @@ define(["./items/card.js", "./items/animations.js"], (Card, Animation) => {
         this.state = "loaded";
       }
     },
-    createCards: function(amount) {
+    createCards: function (amount) {
       // the amount must be divided by two so that only 8/16/32 unique cards will be created
       for (let i = 0; i < amount; i++) {
         let card = Card.createCard();
+        card.addListenerToCard();
         this.appendToDeck(card.domElement);
-
-        card.domElement.addEventListener("click", () => {
-          card.changeCardState("revealed");
-        });
-
         this.cards.push(card);
       }
     },
-    cloneCards: function(cards) {
+    cloneCards: function (cards) {
       const length = cards.length;
       for (let i = 0; i < length; i++) {
         cards.push(cards[i]);
       }
     },
-    appendToDeck: function(cardDomElement) {
+    appendToDeck: function (cardDomElement) {
       document
         .querySelector(".gameContainer__deck")
         .appendChild(cardDomElement);
