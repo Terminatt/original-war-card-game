@@ -2,7 +2,9 @@ define(["./items/card.js", "./items/animations.js"], (Card, Animation) => {
   return {
     state: "loading",
     cards: [],
+    activeCards: [],
     cardAmount: 0,
+    intervalId: null,
     loadedCards: 0,
 
     init: function () {
@@ -45,8 +47,6 @@ define(["./items/card.js", "./items/animations.js"], (Card, Animation) => {
       );
     },
     listenToStateChange: function () {
-      let loadedCards = 0;
-
       setInterval(() => {
         switch (this.state) {
           case "menuHiding":
@@ -62,6 +62,7 @@ define(["./items/card.js", "./items/animations.js"], (Card, Animation) => {
             this.onCardReady();
             break;
           case "loaded":
+            window.clearInterval(this.intervalId);
             break;
         }
       }, 1);
@@ -84,7 +85,8 @@ define(["./items/card.js", "./items/animations.js"], (Card, Animation) => {
     },
     onDeckLoaded: function () {
       this.createCards(this.cardAmount);
-      //this.cloneCards(this.cards);
+      this.cloneCards();
+      this.appendCards();
       this.state = "cardReady";
     },
     onCardReady: function () {
@@ -106,23 +108,35 @@ define(["./items/card.js", "./items/animations.js"], (Card, Animation) => {
     },
     createCards: function (amount) {
       // the amount must be divided by two so that only 8/16/32 unique cards will be created
+      amount = amount / 2;
       for (let i = 0; i < amount; i++) {
         let card = Card.createCard();
         card.addListenerToCard();
-        this.appendToDeck(card.domElement);
+        card.generateRandomId();
+
         this.cards.push(card);
       }
     },
-    cloneCards: function (cards) {
-      const length = cards.length;
+    cloneCards: function () {
+      const length = this.cards.length;
       for (let i = 0; i < length; i++) {
-        cards.push(cards[i]);
+        let card = Card.createCard();
+        card.addListenerToCard();
+        card.id = this.cards[i].id;
+
+        this.cards.push(card);
       }
     },
     appendToDeck: function (cardDomElement) {
       document
         .querySelector(".gameContainer__deck")
         .appendChild(cardDomElement);
+    },
+    appendCards: function () {
+      const length = this.cards.length;
+      for (i = 0; i < length; i++) {
+        this.appendToDeck(this.cards[i].domElement);
+      }
     }
   };
 });

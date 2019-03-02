@@ -8,6 +8,7 @@ define(() => {
       return {
         domElement: cardDomElement,
         cardState: "hidden",
+        id: null,
         setToVisible: function () {
           this.cardState = "visible";
           this.domElement.classList.add("deck__card--clicked");
@@ -23,6 +24,9 @@ define(() => {
             this.setToVisible();
           });
         },
+        generateRandomId: function () {
+          this.id = new Date().valueOf();
+        }
       }
     },
   };
