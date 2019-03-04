@@ -3,13 +3,16 @@ define(["./items/card.js", "./items/animations.js"], (Card, Animation) => {
     state: "loading",
     cards: [],
     activeCards: [],
+    randomNumbers: [],
     cardAmount: 0,
-    intervalId: null,
     loadedCards: 0,
+    intervalId: null,
 
     init: function() {
       this.listenToStateChange();
       this.attachListeners();
+      this.populateRandomNumbersArray(8);
+      this.shuffleRandomNumbersArray();
     },
     attachListeners: function() {
       this.attachListenerBtn16();
@@ -135,6 +138,25 @@ define(["./items/card.js", "./items/animations.js"], (Card, Animation) => {
       const length = this.cards.length;
       for (i = 0; i < length; i++) {
         this.appendToDeck(this.cards[i].domElement);
+      }
+    },
+    populateRandomNumbersArray: function(max) {
+      for (let i = 0; i < max; i++) {
+        this.randomNumbers.push(i);
+      }
+    },
+    shuffleRandomNumbersArray: function() {
+      let max = this.randomNumbers.length - 1;
+      const length = this.randomNumbers.length;
+
+      while (max > 0) {
+        const rIndex = Math.floor(Math.random() * length),
+          mNumber = this.randomNumbers[max],
+          rNumber = this.randomNumbers[rIndex];
+
+        this.randomNumbers[max] = rNumber;
+        this.randomNumbers[rIndex] = mNumber;
+        max--;
       }
     }
   };

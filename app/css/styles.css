@@ -139,7 +139,7 @@ h1 {
   background-size: 100% 100%;
 }
 .deck__card::before {
-  background: url("../img/faces/face_01.png");
+  background: url("../img/faces/face_00.png");
   background-repeat: no-repeat;
   background-size: 100% 100%;
   transform: rotateY(180deg);
