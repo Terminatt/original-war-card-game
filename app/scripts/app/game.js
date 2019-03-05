@@ -3,7 +3,6 @@ define(["./items/card.js", "./items/animations.js"], (Card, Animation) => {
     state: "loading",
     cards: [],
     activeCards: [],
-    randomNumbers: [],
     cardAmount: 0,
     loadedCards: 0,
     intervalId: null,
@@ -11,8 +10,6 @@ define(["./items/card.js", "./items/animations.js"], (Card, Animation) => {
     init: function() {
       this.listenToStateChange();
       this.attachListeners();
-      this.populateRandomNumbersArray(8);
-      this.shuffleRandomNumbersArray();
     },
     attachListeners: function() {
       this.attachListenerBtn16();
@@ -65,7 +62,6 @@ define(["./items/card.js", "./items/animations.js"], (Card, Animation) => {
             this.onCardReady();
             break;
           case "loaded":
-            window.clearInterval(this.intervalId);
             break;
         }
       }, 1);
@@ -88,6 +84,7 @@ define(["./items/card.js", "./items/animations.js"], (Card, Animation) => {
     },
     onDeckLoaded: function() {
       this.createCards(this.cardAmount);
+      this.setImagesToCards();
       this.cloneCards();
       this.appendCards();
       this.state = "cardReady";
@@ -108,6 +105,9 @@ define(["./items/card.js", "./items/animations.js"], (Card, Animation) => {
       } else {
         this.state = "loaded";
       }
+    },
+    onLoaded: function() {
+      window.clearInterval(this.intervalId);
     },
     createCards: function(amount) {
       // the amount must be divided by two so that only 8/16/32 unique cards will be created
@@ -140,23 +140,32 @@ define(["./items/card.js", "./items/animations.js"], (Card, Animation) => {
         this.appendToDeck(this.cards[i].domElement);
       }
     },
-    populateRandomNumbersArray: function(max) {
+    populateEmptyArray: function(array, max) {
       for (let i = 0; i < max; i++) {
-        this.randomNumbers.push(i);
+        array.push(i);
       }
     },
-    shuffleRandomNumbersArray: function() {
-      let max = this.randomNumbers.length - 1;
-      const length = this.randomNumbers.length;
+    shuffleArray: function(array) {
+      let max = array.length - 1;
+      const length = array.length;
 
       while (max > 0) {
         const rIndex = Math.floor(Math.random() * length),
-          mNumber = this.randomNumbers[max],
-          rNumber = this.randomNumbers[rIndex];
+          mNumber = array[max],
+          rNumber = array[rIndex];
 
-        this.randomNumbers[max] = rNumber;
-        this.randomNumbers[rIndex] = mNumber;
+        array[max] = rNumber;
+        array[rIndex] = mNumber;
         max--;
+      }
+    },
+    setImagesToCards: function() {
+      let rNumbers = [];
+      this.populateEmptyArray(rNumbers, this.cardAmount / 2); // divided by 2 so that there is only a half of unique images
+      this.shuffleArray(rNumbers);
+
+      for (let i = 0; i < this.cards.length; i++) {
+        this.cards[i].setImageUrl(rNumbers[i]);
       }
     }
   };
