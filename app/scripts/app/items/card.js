@@ -8,7 +8,9 @@ define(() => {
 
   Card.prototype.setToVisible = function() {
     this.cardState = "visible";
-    this.domElement.classList.add("deck__card--clicked");
+    this.domElement
+      .querySelector(".cardContainer__card")
+      .classList.add("cardContainer__card--clicked");
   };
 
   Card.prototype.setToHidden = function() {
@@ -30,12 +32,26 @@ define(() => {
 
   return {
     createCard: function() {
-      const cardDomElement = document.createElement("DIV");
-      cardDomElement.classList.add("deck__card");
-      cardDomElement.classList.add("deck__card--hidden");
-
-      return new Card(cardDomElement, new Date().valueOf());
+      const cardDomElementContainer = this.createDomElement();
+      return new Card(cardDomElementContainer, new Date().valueOf());
     },
-    generateUniqueRandomNumber: function() {}
+    createDomElement: function() {
+      const cardDomElementContainer = document.createElement("DIV"),
+        cardDomElement = document.createElement("DIV"),
+        cardDomFront = document.createElement("DIV"),
+        cardDomBack = document.createElement("DIV");
+
+      cardDomElementContainer.classList.add("deck__cardContainer");
+      cardDomElementContainer.classList.add("deck__cardContainer--hidden");
+      cardDomElement.classList.add("cardContainer__card");
+      cardDomFront.classList.add("card__front");
+      cardDomBack.classList.add("card__back");
+
+      cardDomElement.appendChild(cardDomFront);
+      cardDomElement.appendChild(cardDomBack);
+      cardDomElementContainer.appendChild(cardDomElement);
+
+      return cardDomElementContainer;
+    }
   };
 });

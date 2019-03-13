@@ -110,7 +110,7 @@ h1 {
   border-width: 2px;
   border-radius: 10px;
 }
-.deck__card {
+.deck__cardContainer {
   width: 150px;
   height: 100px;
   cursor: pointer;
@@ -119,42 +119,46 @@ h1 {
   margin-left: 50px;
   z-index: 4;
 }
-.deck__card::before,
-.deck__card::after {
-  content: "";
+.cardContainer__card {
+  position: absolute;
   width: 100%;
   height: 100%;
-  position: absolute;
-  background: #ffffff;
-  border-radius: 6px;
-  box-sizing: border-box;
-  transition: 0.6s transform linear;
-  backface-visibility: hidden;
+  transform-style: preserve-3d;
+  transition: all 0.5s ease;
 }
-.deck__card::after {
-  background-color: rgb(90, 0, 0);
+.cardContainer__card--clicked {
+  transform: rotateY(180deg);
+}
+.card__front {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  overflow: hidden;
+  border-width: 5px;
   border-color: rgb(90, 0, 0);
+  border-radius: 10px;
+  background-color: rgb(90, 0, 0);
   background-image: url("../img/cards/card-am.png");
   background-repeat: no-repeat;
   background-size: 100% 100%;
 }
-.deck__card::before {
+.card__back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
   background: url("../img/faces/face_00.png");
   background-repeat: no-repeat;
   background-size: 100% 100%;
+  border-radius: 10px;
   transform: rotateY(180deg);
-}
-.deck__card--clicked::after {
-  transform: rotateY(180deg);
-}
-.deck__card--clicked::before {
-  transform: rotate(360deg);
 }
 .gameContainer__transparentDeck--invisible,
 .gameContainer__deck--invisible {
   display: none;
 }
-.deck__card--hidden {
+.deck__cardContainer--hidden {
   visibility: hidden;
 }
 .menuContainer {

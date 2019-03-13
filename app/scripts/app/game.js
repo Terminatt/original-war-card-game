@@ -97,7 +97,7 @@ define(["./items/card.js", "./items/animations.js"], (Card, Animation) => {
 
         this.animateWithClassRemove(
           card.domElement,
-          "deck__card--hidden",
+          "deck__cardContainer--hidden",
           "anHandingOutCard",
           "cardReady"
         );
@@ -125,6 +125,7 @@ define(["./items/card.js", "./items/animations.js"], (Card, Animation) => {
         let card = Card.createCard();
         card.addListenerToCard();
         card.id = this.cards[i].id;
+        card.imageUrl = this.cards[i].imageUrl;
 
         this.cards.push(card);
       }
