@@ -30,6 +30,12 @@ define(() => {
     this.imageUrl = `../img/faces/face_0${index}.png`;
   };
 
+  Card.prototype.setBackgroundStyle = function() {
+    this.domElement.querySelector(
+      ".card__back"
+    ).style.backgroundImage = `url('${this.imageUrl}')`;
+  };
+
   return {
     createCard: function() {
       const cardDomElementContainer = this.createDomElement();

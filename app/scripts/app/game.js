@@ -86,6 +86,9 @@ define(["./items/card.js", "./items/animations.js"], (Card, Animation) => {
       this.createCards(this.cardAmount);
       this.setImagesToCards();
       this.cloneCards();
+      this.setBackgroundStylesToCards();
+      this.shuffleArray(this.cards);
+      console.log(this.cards);
       this.appendCards();
       this.state = "cardReady";
     },
@@ -163,10 +166,14 @@ define(["./items/card.js", "./items/animations.js"], (Card, Animation) => {
     setImagesToCards: function() {
       let rNumbers = [];
       this.populateEmptyArray(rNumbers, this.cardAmount / 2); // divided by 2 so that there is only a half of unique images
-      this.shuffleArray(rNumbers);
 
       for (let i = 0; i < this.cards.length; i++) {
         this.cards[i].setImageUrl(rNumbers[i]);
+      }
+    },
+    setBackgroundStylesToCards: function() {
+      for (let i = 0; i < this.cards.length; i++) {
+        this.cards[i].setBackgroundStyle();
       }
     }
   };
