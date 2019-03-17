@@ -5,16 +5,14 @@ define(["./items/card.js", "./items/animations.js"], (Card, Animation) => {
     activeCards: [],
     cardAmount: 0,
     loadedCards: 0,
-    intervalId: null,
 
-    init: function() {
-      this.listenToStateChange();
+    init: function () {
       this.attachListeners();
     },
-    attachListeners: function() {
+    attachListeners: function () {
       this.attachListenerBtn16();
     },
-    attachListenerBtn16: function() {
+    attachListenerBtn16: function () {
       const btnCards_16 = document.querySelector("#btnCards_16");
 
       btnCards_16.addEventListener("click", () => {
@@ -23,50 +21,50 @@ define(["./items/card.js", "./items/animations.js"], (Card, Animation) => {
         this.animate(mainMenu, "anFadeAway", "menuHiding");
       });
     },
-    addListenerToAnimEnd: function(element, stateChange) {
+    addListenerToAnimEnd: function (element, stateChange, cb) {
       element.addEventListener("animationend", () => {
+        cb = cb.bind(this);
         this.state = stateChange;
-        element.removeEventListener("animationend", () => {});
+        cb(this.state);
+        element.removeEventListener("animationend", () => { });
       });
     },
-    animate: function(element, cssClassAnimationName, stateChange) {
-      this.addListenerToAnimEnd(element, stateChange);
+    animate: function (element, cssClassAnimationName, stateChange) {
+      this.addListenerToAnimEnd(element, stateChange, this.listenToStateChange);
       Animation.addAnimation(element, cssClassAnimationName);
     },
-    animateWithClassRemove: function(
+    animateWithClassRemove: function (
       element,
       cssClassToRemove,
       cssClassAnimationName,
       stateChange
     ) {
-      this.addListenerToAnimEnd(element, stateChange);
+      this.addListenerToAnimEnd(element, stateChange, this.listenToStateChange);
       Animation.addAnimationWithClassDelete(
         element,
         cssClassToRemove,
         cssClassAnimationName
       );
     },
-    listenToStateChange: function() {
-      setInterval(() => {
-        switch (this.state) {
-          case "menuHiding":
-            this.onMenuHiding();
-            break;
-          case "transparentDeckLoaded":
-            this.onTransparentDeckLoaded();
-            break;
-          case "deckLoaded":
-            this.onDeckLoaded();
-            break;
-          case "cardReady":
-            this.onCardReady();
-            break;
-          case "loaded":
-            break;
-        }
-      }, 1);
+    listenToStateChange: function (state) {
+      switch (state) {
+        case "menuHiding":
+          this.onMenuHiding();
+          break;
+        case "transparentDeckLoaded":
+          this.onTransparentDeckLoaded(this.listenToStateChange);
+          break;
+        case "deckLoaded":
+          this.onDeckLoaded(this.listenToStateChange);
+          break;
+        case "cardReady":
+          this.onCardReady();
+          break;
+        case "loaded":
+          break;
+      }
     },
-    onMenuHiding: function() {
+    onMenuHiding: function () {
       const transparentDeck = document.querySelector(
         ".gameContainer__transparentDeck"
       );
@@ -77,22 +75,25 @@ define(["./items/card.js", "./items/animations.js"], (Card, Animation) => {
         "transparentDeckLoaded"
       );
     },
-    onTransparentDeckLoaded: function() {
+    onTransparentDeckLoaded: function (cb) {
+      cb = cb.bind(this);
       const deck = document.querySelector(".gameContainer__deck");
       deck.classList.remove("gameContainer__deck--invisible");
       this.state = "deckLoaded";
+      cb(this.state);
     },
-    onDeckLoaded: function() {
+    onDeckLoaded: function (cb) {
+      cb = cb.bind(this);
       this.createCards(this.cardAmount);
       this.setImagesToCards();
       this.cloneCards();
       this.setBackgroundStylesToCards();
       this.shuffleArray(this.cards);
-      console.log(this.cards);
       this.appendCards();
       this.state = "cardReady";
+      cb(this.state);
     },
-    onCardReady: function() {
+    onCardReady: function () {
       if (this.loadedCards < this.cardAmount) {
         const index = this.loadedCards;
         let card = this.cards[index];
@@ -109,10 +110,7 @@ define(["./items/card.js", "./items/animations.js"], (Card, Animation) => {
         this.state = "loaded";
       }
     },
-    onLoaded: function() {
-      window.clearInterval(this.intervalId);
-    },
-    createCards: function(amount) {
+    createCards: function (amount) {
       // the amount must be divided by two so that only 8/16/32 unique cards will be created
       amount = amount / 2;
       for (let i = 0; i < amount; i++) {
@@ -122,7 +120,7 @@ define(["./items/card.js", "./items/animations.js"], (Card, Animation) => {
         this.cards.push(card);
       }
     },
-    cloneCards: function() {
+    cloneCards: function () {
       const length = this.cards.length;
       for (let i = 0; i < length; i++) {
         let card = Card.createCard();
@@ -133,23 +131,23 @@ define(["./items/card.js", "./items/animations.js"], (Card, Animation) => {
         this.cards.push(card);
       }
     },
-    appendToDeck: function(cardDomElement) {
+    appendToDeck: function (cardDomElement) {
       document
         .querySelector(".gameContainer__deck")
         .appendChild(cardDomElement);
     },
-    appendCards: function() {
+    appendCards: function () {
       const length = this.cards.length;
       for (i = 0; i < length; i++) {
         this.appendToDeck(this.cards[i].domElement);
       }
     },
-    populateEmptyArray: function(array, max) {
+    populateEmptyArray: function (array, max) {
       for (let i = 0; i < max; i++) {
         array.push(i);
       }
     },
-    shuffleArray: function(array) {
+    shuffleArray: function (array) {
       let max = array.length - 1;
       const length = array.length;
 
@@ -163,7 +161,7 @@ define(["./items/card.js", "./items/animations.js"], (Card, Animation) => {
         max--;
       }
     },
-    setImagesToCards: function() {
+    setImagesToCards: function () {
       let rNumbers = [];
       this.populateEmptyArray(rNumbers, this.cardAmount / 2); // divided by 2 so that there is only a half of unique images
 
@@ -171,7 +169,7 @@ define(["./items/card.js", "./items/animations.js"], (Card, Animation) => {
         this.cards[i].setImageUrl(rNumbers[i]);
       }
     },
-    setBackgroundStylesToCards: function() {
+    setBackgroundStylesToCards: function () {
       for (let i = 0; i < this.cards.length; i++) {
         this.cards[i].setBackgroundStyle();
       }
