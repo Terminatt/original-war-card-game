@@ -148,17 +148,11 @@ define(["./items/card.js", "./items/animations.js"], (Card, Animation) => {
       }
     },
     shuffleArray: function (array) {
-      let currentIndex = array.length,
-        temporaryValue,
-        randomIndex;
-
-      while (currentIndex !== 0) {
-        randomIndex = Math.floor(Math.random() * currentIndex);
-        currentIndex -= 1;
-
-        temporaryValue = array[currentIndex];
-        array[currentIndex] = array[randomIndex];
-        array[randomIndex] = temporaryValue;
+      for (let i = array.length - 1; i > 0; i--) {
+        let j = Math.floor(Math.random() * (i + 1));
+        let temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;
       }
 
       return array;
