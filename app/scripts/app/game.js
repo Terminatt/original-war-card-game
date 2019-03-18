@@ -148,18 +148,20 @@ define(["./items/card.js", "./items/animations.js"], (Card, Animation) => {
       }
     },
     shuffleArray: function (array) {
-      let max = array.length - 1;
-      const length = array.length;
+      let currentIndex = array.length,
+        temporaryValue,
+        randomIndex;
 
-      while (max > 0) {
-        const rIndex = Math.floor(Math.random() * length),
-          mNumber = array[max],
-          rNumber = array[rIndex];
+      while (currentIndex !== 0) {
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex -= 1;
 
-        array[max] = rNumber;
-        array[rIndex] = mNumber;
-        max--;
+        temporaryValue = array[currentIndex];
+        array[currentIndex] = array[randomIndex];
+        array[randomIndex] = temporaryValue;
       }
+
+      return array;
     },
     setImagesToCards: function () {
       let rNumbers = [];
