@@ -3,6 +3,7 @@ define(["./items/card.js", "./items/animations.js"], (Card, Animation) => {
     state: "loading",
     cards: [],
     activeCards: [],
+    foundCards: [],
     cardAmount: 0,
     loadedCards: 0,
 
@@ -115,8 +116,7 @@ define(["./items/card.js", "./items/animations.js"], (Card, Animation) => {
       amount = amount / 2;
       for (let i = 0; i < amount; i++) {
         let card = Card.createCard();
-        card.addListenerToCard();
-
+        this.addListenerToCard(card);
         this.cards.push(card);
       }
     },
@@ -124,12 +124,22 @@ define(["./items/card.js", "./items/animations.js"], (Card, Animation) => {
       const length = this.cards.length;
       for (let i = 0; i < length; i++) {
         let card = Card.createCard();
-        card.addListenerToCard();
+        this.addListenerToCard(card);
+
         card.id = this.cards[i].id;
         card.imageUrl = this.cards[i].imageUrl;
 
         this.cards.push(card);
       }
+    },
+    addListenerToCard: function (card) {
+      card.domElement.addEventListener("click", () => {
+        if (this.activeCards.length < 2) {
+          card.setToVisible();
+          this.activeCards.push(card);
+          this.compareCards();
+        }
+      });
     },
     appendToDeck: function (cardDomElement) {
       document
@@ -140,11 +150,6 @@ define(["./items/card.js", "./items/animations.js"], (Card, Animation) => {
       const length = this.cards.length;
       for (i = 0; i < length; i++) {
         this.appendToDeck(this.cards[i].domElement);
-      }
-    },
-    populateEmptyArray: function (array, max) {
-      for (let i = 0; i < max; i++) {
-        array.push(i);
       }
     },
     shuffleArray: function (array) {
@@ -158,16 +163,32 @@ define(["./items/card.js", "./items/animations.js"], (Card, Animation) => {
       return array;
     },
     setImagesToCards: function () {
-      let rNumbers = [];
-      this.populateEmptyArray(rNumbers, this.cardAmount / 2); // divided by 2 so that there is only a half of unique images
-
       for (let i = 0; i < this.cards.length; i++) {
-        this.cards[i].setImageUrl(rNumbers[i]);
+        this.cards[i].setImageUrl(i);
       }
     },
     setBackgroundStylesToCards: function () {
       for (let i = 0; i < this.cards.length; i++) {
         this.cards[i].setBackgroundStyle();
+      }
+    },
+    checkIfSame: function (firstCard, secondCard) {
+      if (firstCard.id.localeCompare(secondCard.id) === 0) {
+        return true;
+      } else {
+        return false;
+      }
+    },
+    compareCards: function () {
+      if (this.activeCards.length !== 2) { return; }
+      if (this.checkIfSame(this.activeCards[0], this.activeCards[1])) {
+        this.foundCards.push(this.activeCards[0]);
+        this.foundCards.push(this.activeCards[1]);
+        this.activeCards = [];
+      } else {
+        this.activeCards[0].setToHidden();
+        this.activeCards[1].setToHidden();
+        this.activeCards = [];
       }
     }
   };
