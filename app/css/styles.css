@@ -189,7 +189,6 @@ h1 {
   height: 100%;
 }
 .backgroundFront {
-  background-image: url("../img/background/backgroundMain_01.jpg");
   background-repeat: no-repeat;
   background-size: 100% 100%;
   z-index: 1;
@@ -227,6 +226,11 @@ h1 {
   animation-name: handing-out-card;
   animation-duration: 0.5s;
 }
+.anDisappear {
+  z-index: -1 !important;
+  animation-name: gradually-disappear;
+  animation-duration: 2s;
+}
 /*############### ANIMATIONS ###############*/
 @keyframes exit-right {
   20% {
@@ -251,6 +255,14 @@ h1 {
   }
   to {
     transform: translate(0, 0);
+  }
+}
+@keyframes gradually-disappear {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
   }
 }
 /*############### MEDIA QUERYS ###############*/

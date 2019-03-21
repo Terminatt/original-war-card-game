@@ -1,4 +1,4 @@
-define(["./items/card.js", "./items/animations.js"], (Card, Animation) => {
+define(["./items/card.js", "./items/animations.js", "./items/dynamic-background.js"], (Card, Animation, DBackground) => {
   return {
     state: "loading",
     cards: [],
@@ -8,6 +8,7 @@ define(["./items/card.js", "./items/animations.js"], (Card, Animation) => {
     loadedCards: 0,
 
     init: function () {
+      DBackground.setMainMenuBackground();
       this.attachListeners();
     },
     attachListeners: function () {
@@ -20,6 +21,7 @@ define(["./items/card.js", "./items/animations.js"], (Card, Animation) => {
         const mainMenu = document.querySelector(".gameContainer__mainMenu");
         this.cardAmount = 16;
         this.animate(mainMenu, "anFadeAway", "menuHiding");
+        DBackground.dynamicallyChangeBackground();
       });
     },
     addListenerToAnimEnd: function (element, stateChange, cb) {
@@ -185,10 +187,16 @@ define(["./items/card.js", "./items/animations.js"], (Card, Animation) => {
         this.foundCards.push(this.activeCards[0]);
         this.foundCards.push(this.activeCards[1]);
         this.activeCards = [];
+        this.checkIfWon();
       } else {
         this.activeCards[0].setToHidden();
         this.activeCards[1].setToHidden();
         this.activeCards = [];
+      }
+    },
+    checkIfWon: function () {
+      if (this.cardAmount === this.foundCards.length) {
+        console.log("You Won")
       }
     }
   };
