@@ -24,6 +24,7 @@ define([
       btnCards_16.addEventListener("click", () => {
         const mainMenu = document.querySelector(".gameContainer__mainMenu");
         this.cardAmount = 16;
+        this.showInfoMenu();
         this.animate(mainMenu, "anFadeAway", "menuHiding");
         DBackground.dynamicallyChangeBackground();
       });
@@ -207,6 +208,16 @@ define([
       if (this.cardAmount === this.foundCards.length) {
         console.log("You Won");
       }
+    },
+    showInfoMenu: function() {
+      document
+        .querySelector(".infoContainer")
+        .classList.remove("infoContainer--hidden");
+    },
+    hideInfoMenu: function() {
+      document
+        .querySelector(".infoContainer")
+        .classList.add("infoContainer--hidden");
     }
   };
 });
