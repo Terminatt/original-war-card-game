@@ -1,4 +1,8 @@
-define(["./items/card.js", "./items/animations.js", "./items/dynamic-background.js"], (Card, Animation, DBackground) => {
+define([
+  "./items/card.js",
+  "./items/animations.js",
+  "./items/dynamic-background.js"
+], (Card, Animation, DBackground) => {
   return {
     state: "loading",
     cards: [],
@@ -7,14 +11,14 @@ define(["./items/card.js", "./items/animations.js", "./items/dynamic-background.
     cardAmount: 0,
     loadedCards: 0,
 
-    init: function () {
+    init: function() {
       DBackground.setMainMenuBackground();
       this.attachListeners();
     },
-    attachListeners: function () {
+    attachListeners: function() {
       this.attachListenerBtn16();
     },
-    attachListenerBtn16: function () {
+    attachListenerBtn16: function() {
       const btnCards_16 = document.querySelector("#btnCards_16");
 
       btnCards_16.addEventListener("click", () => {
@@ -24,19 +28,19 @@ define(["./items/card.js", "./items/animations.js", "./items/dynamic-background.
         DBackground.dynamicallyChangeBackground();
       });
     },
-    addListenerToAnimEnd: function (element, stateChange, cb) {
+    addListenerToAnimEnd: function(element, stateChange, cb) {
       element.addEventListener("animationend", () => {
         cb = cb.bind(this);
         this.state = stateChange;
         cb(this.state);
-        element.removeEventListener("animationend", () => { });
+        element.removeEventListener("animationend", () => {});
       });
     },
-    animate: function (element, cssClassAnimationName, stateChange) {
+    animate: function(element, cssClassAnimationName, stateChange) {
       this.addListenerToAnimEnd(element, stateChange, this.listenToStateChange);
       Animation.addAnimation(element, cssClassAnimationName);
     },
-    animateWithClassRemove: function (
+    animateWithClassRemove: function(
       element,
       cssClassToRemove,
       cssClassAnimationName,
@@ -49,7 +53,7 @@ define(["./items/card.js", "./items/animations.js", "./items/dynamic-background.
         cssClassAnimationName
       );
     },
-    listenToStateChange: function (state) {
+    listenToStateChange: function(state) {
       switch (state) {
         case "menuHiding":
           this.onMenuHiding();
@@ -63,11 +67,9 @@ define(["./items/card.js", "./items/animations.js", "./items/dynamic-background.
         case "cardReady":
           this.onCardReady();
           break;
-        case "loaded":
-          break;
       }
     },
-    onMenuHiding: function () {
+    onMenuHiding: function() {
       const transparentDeck = document.querySelector(
         ".gameContainer__transparentDeck"
       );
@@ -78,14 +80,14 @@ define(["./items/card.js", "./items/animations.js", "./items/dynamic-background.
         "transparentDeckLoaded"
       );
     },
-    onTransparentDeckLoaded: function (cb) {
+    onTransparentDeckLoaded: function(cb) {
       cb = cb.bind(this);
       const deck = document.querySelector(".gameContainer__deck");
       deck.classList.remove("gameContainer__deck--invisible");
       this.state = "deckLoaded";
       cb(this.state);
     },
-    onDeckLoaded: function (cb) {
+    onDeckLoaded: function(cb) {
       cb = cb.bind(this);
       this.createCards(this.cardAmount);
       this.setImagesToCards();
@@ -96,7 +98,7 @@ define(["./items/card.js", "./items/animations.js", "./items/dynamic-background.
       this.state = "cardReady";
       cb(this.state);
     },
-    onCardReady: function () {
+    onCardReady: function() {
       if (this.loadedCards < this.cardAmount) {
         const index = this.loadedCards;
         let card = this.cards[index];
@@ -110,10 +112,10 @@ define(["./items/card.js", "./items/animations.js", "./items/dynamic-background.
         );
         this.loadedCards++;
       } else {
-        this.state = "loaded";
+        this.state = "readyToClick";
       }
     },
-    createCards: function (amount) {
+    createCards: function(amount) {
       // the amount must be divided by two so that only 8/16/32 unique cards will be created
       amount = amount / 2;
       for (let i = 0; i < amount; i++) {
@@ -122,7 +124,7 @@ define(["./items/card.js", "./items/animations.js", "./items/dynamic-background.
         this.cards.push(card);
       }
     },
-    cloneCards: function () {
+    cloneCards: function() {
       const length = this.cards.length;
       for (let i = 0; i < length; i++) {
         let card = Card.createCard();
@@ -134,27 +136,31 @@ define(["./items/card.js", "./items/animations.js", "./items/dynamic-background.
         this.cards.push(card);
       }
     },
-    addListenerToCard: function (card) {
+    addListenerToCard: function(card) {
       card.domElement.addEventListener("click", () => {
-        if (this.activeCards.length < 2) {
+        if (this.activeCards.length < 2 && this.state === "readyToClick") {
           card.setToVisible();
           this.activeCards.push(card);
-          this.compareCards();
+
+          if (this.activeCards.length === 2) {
+            this.state = "notReadyToClick";
+            this.compareCards();
+          }
         }
       });
     },
-    appendToDeck: function (cardDomElement) {
+    appendToDeck: function(cardDomElement) {
       document
         .querySelector(".gameContainer__deck")
         .appendChild(cardDomElement);
     },
-    appendCards: function () {
+    appendCards: function() {
       const length = this.cards.length;
       for (i = 0; i < length; i++) {
         this.appendToDeck(this.cards[i].domElement);
       }
     },
-    shuffleArray: function (array) {
+    shuffleArray: function(array) {
       for (let i = array.length - 1; i > 0; i--) {
         let j = Math.floor(Math.random() * (i + 1));
         let temp = array[i];
@@ -164,39 +170,42 @@ define(["./items/card.js", "./items/animations.js", "./items/dynamic-background.
 
       return array;
     },
-    setImagesToCards: function () {
+    setImagesToCards: function() {
       for (let i = 0; i < this.cards.length; i++) {
         this.cards[i].setImageUrl(i);
       }
     },
-    setBackgroundStylesToCards: function () {
+    setBackgroundStylesToCards: function() {
       for (let i = 0; i < this.cards.length; i++) {
         this.cards[i].setBackgroundStyle();
       }
     },
-    checkIfSame: function (firstCard, secondCard) {
+    checkIfSame: function(firstCard, secondCard) {
       if (firstCard.id.localeCompare(secondCard.id) === 0) {
         return true;
       } else {
         return false;
       }
     },
-    compareCards: function () {
-      if (this.activeCards.length !== 2) { return; }
+    compareCards: function() {
       if (this.checkIfSame(this.activeCards[0], this.activeCards[1])) {
         this.foundCards.push(this.activeCards[0]);
         this.foundCards.push(this.activeCards[1]);
         this.activeCards = [];
+        this.state = "readyToClick";
         this.checkIfWon();
       } else {
-        this.activeCards[0].setToHidden();
-        this.activeCards[1].setToHidden();
-        this.activeCards = [];
+        setTimeout(() => {
+          this.activeCards[0].setToHidden();
+          this.activeCards[1].setToHidden();
+          this.activeCards = [];
+          this.state = "readyToClick";
+        }, 1000);
       }
     },
-    checkIfWon: function () {
+    checkIfWon: function() {
       if (this.cardAmount === this.foundCards.length) {
-        console.log("You Won")
+        console.log("You Won");
       }
     }
   };
