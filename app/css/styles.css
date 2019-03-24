@@ -1,8 +1,12 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 /*############### HTML TAGS ############### */
 html,
 body {
-  margin: 0px;
-  height: 100%;
+  height: 900px;
   width: 100%;
   position: relative;
 }
@@ -17,7 +21,7 @@ h1 {
   position: relative;
 }
 .infoContainer {
-  position: absolute;
+  position: fixed;
   background-color: white;
 
   width: 25%;
@@ -81,6 +85,11 @@ h1 {
   width: 300px;
   height: 430px;
 
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
   background-color: #8c8663;
 }
 .midMostContainer--border {
@@ -116,7 +125,7 @@ h1 {
 }
 .gameContainer__deck,
 .gameContainer__transparentDeck {
-  width: 875px;
+  width: 60%;
   height: 700px;
   z-index: 2;
 
@@ -141,8 +150,8 @@ h1 {
   height: 100px;
   cursor: pointer;
   position: relative;
-  margin-top: 35px;
-  margin-left: 50px;
+  margin-top: 25px;
+  margin-left: 43px;
   z-index: 4;
 }
 .cardContainer__card {
@@ -213,6 +222,8 @@ h1 {
   position: absolute;
   width: 100%;
   height: 100%;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
 }
 .backgroundFront {
   background-repeat: no-repeat;
@@ -252,10 +263,15 @@ h1 {
   animation-name: handing-out-card;
   animation-duration: 0.5s;
 }
-.anDisappear {
-  z-index: -1 !important;
-  animation-name: gradually-disappear;
+.anComeFromRight {
+  animation-name: come-from-right;
   animation-duration: 2s;
+  animation-fill-mode: backwards;
+}
+.anComeFromLeft {
+  animation-name: come-from-left;
+  animation-duration: 2s;
+  animation-fill-mode: backwards;
 }
 /*############### ANIMATIONS ###############*/
 @keyframes exit-right {
@@ -283,12 +299,20 @@ h1 {
     transform: translate(0, 0);
   }
 }
-@keyframes gradually-disappear {
-  from {
-    opacity: 1;
+@keyframes come-from-right {
+  0% {
+    transform: translateX(5000px);
   }
-  to {
-    opacity: 0;
+  100% {
+    transform: translateX(0px);
+  }
+}
+@keyframes come-from-left {
+  0% {
+    transform: translateX(-5000px);
+  }
+  100% {
+    transform: translateX(0px);
   }
 }
 /*############### MEDIA QUERYS ###############*/
@@ -296,7 +320,7 @@ h1 {
   .gameContainer__deck,
   .gameContainer__transparentDeck {
     width: 60%;
-    height: 75%;
+    height: 600px;
 
     transform: translate(-50%, -50%);
   }
