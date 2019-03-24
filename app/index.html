@@ -1,16 +1,14 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+  <head>
+    <title>Original War Card Game</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Ernest Rudnicki" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="./css/styles.css" />
+  </head>
 
-<head>
-  <title>Original War Card Game</title>
-  <meta charset="utf-8" />
-  <meta name="author" content="Ernest Rudnicki" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" type="text/css" href="./css/styles.css" />
-</head>
-
-<body>
-  <div class="app">
+  <body>
     <div class="infoContainer infoContainer--hidden">
       <div class="infoContainer__border"></div>
       <span>ORGINAL WAR CARDS</span>
@@ -23,20 +21,21 @@
         <div class="midMostContainer midMostContainer--border">
           <button class="midMostContainer__btn">64 karty</button>
           <button class="midMostContainer__btn">32 karty</button>
-          <button id="btnCards_16" class="midMostContainer__btn">16 kart</button>
+          <button id="btnCards_16" class="midMostContainer__btn">
+            16 kart
+          </button>
           <button class="midMostContainer__btn">Autor</button>
           <button class="midMostContainer__btn">Tablica wyników</button>
           <button class="midMostContainer__btn">Najlepsi gracze</button>
         </div>
       </div>
-      <div class="gameContainer__transparentDeck gameContainer__transparentDeck--invisible">
-      </div>
-      <div class="gameContainer__deck gameContainer__deck--invisible">
-      </div>
+      <div
+        class="gameContainer__transparentDeck gameContainer__transparentDeck--invisible"
+      ></div>
+      <div class="gameContainer__deck gameContainer__deck--invisible"></div>
     </div>
     <div class="backgroundFront"></div>
     <div class="backgroundRear"></div>
     <script data-main="./scripts/main.js" src="./scripts/require.js"></script>
-</body>
-
+  </body>
 </html>

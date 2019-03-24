@@ -1,25 +1,19 @@
 * {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
+  box-sizing: inherit;
 }
 /*############### HTML TAGS ############### */
-html,
 body {
-  height: 900px;
+  height: 100vh;
   width: 100%;
   position: relative;
-}
-h1 {
-  margin: 0;
-}
-/*############### ClASSES ############### */
-.app {
+  box-sizing: border-box;
   display: flex;
   flex-wrap: wrap;
-  height: 100%;
   position: relative;
 }
+/*############### ClASSES ############### */
 .infoContainer {
   position: fixed;
   background-color: white;
@@ -193,28 +187,6 @@ h1 {
 }
 .deck__cardContainer--hidden {
   visibility: hidden;
-}
-.menuContainer {
-  width: 25%;
-  height: 100%;
-}
-.navbar {
-  margin: 0px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  min-height: 10%;
-  font-family: "original_war_-_zoneregular";
-  color: red;
-  background-image: linear-gradient(
-    to right,
-    #0e4a02,
-    #2f7008,
-    #53980f,
-    #7bc113,
-    #a8eb12
-  );
 }
 /*############### BACKGROUNDS ###############*/
 .backgroundFront,

@@ -1,8 +1,9 @@
 define([
   "./items/card.js",
   "./items/animations.js",
-  "./items/dynamic-background.js"
-], (Card, Animation, DBackground) => {
+  "./items/dynamic-background.js",
+  "./items/stats.js"
+], (Card, Animation, DBackground, Stats) => {
   return {
     state: "loading",
     cards: [],
@@ -22,12 +23,15 @@ define([
       const btnCards_16 = document.querySelector("#btnCards_16");
 
       btnCards_16.addEventListener("click", () => {
-        const mainMenu = document.querySelector(".gameContainer__mainMenu");
         this.cardAmount = 16;
-        this.showInfoMenu();
-        this.animate(mainMenu, "anFadeAway", "menuHiding");
-        DBackground.dynamicallyChangeBackground();
+        this.startGame();
       });
+    },
+    startGame: function() {
+      const mainMenu = document.querySelector(".gameContainer__mainMenu");
+      this.showInfoMenu();
+      this.animate(mainMenu, "anFadeAway", "menuHiding");
+      DBackground.dynamicallyChangeBackground();
     },
     addListenerToAnimEnd: function(element, stateChange, cb) {
       element.addEventListener("animationend", () => {
@@ -168,7 +172,6 @@ define([
         array[i] = array[j];
         array[j] = temp;
       }
-
       return array;
     },
     setImagesToCards: function() {
