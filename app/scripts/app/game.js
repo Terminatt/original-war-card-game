@@ -37,7 +37,7 @@ define([
       element.addEventListener("animationend", () => {
         cb = cb.bind(this);
         this.state = stateChange;
-        cb(this.state);
+        cb();
         element.removeEventListener("animationend", () => {});
       });
     },
@@ -58,8 +58,8 @@ define([
         cssClassAnimationName
       );
     },
-    listenToStateChange: function(state) {
-      switch (state) {
+    listenToStateChange: function() {
+      switch (this.state) {
         case "menuHiding":
           this.onMenuHiding();
           break;
@@ -70,7 +70,10 @@ define([
           this.onDeckLoaded(this.listenToStateChange);
           break;
         case "cardReady":
-          this.onCardReady();
+          this.onCardReady(this.listenToStateChange);
+          break;
+        case "readyToClick":
+          Stats.startTimer();
           break;
       }
     },
@@ -90,7 +93,7 @@ define([
       const deck = document.querySelector(".gameContainer__deck");
       deck.classList.remove("gameContainer__deck--invisible");
       this.state = "deckLoaded";
-      cb(this.state);
+      cb();
     },
     onDeckLoaded: function(cb) {
       cb = cb.bind(this);
@@ -101,9 +104,10 @@ define([
       this.shuffleArray(this.cards);
       this.appendCards();
       this.state = "cardReady";
-      cb(this.state);
+      cb();
     },
-    onCardReady: function() {
+    onCardReady: function(cb) {
+      cb = cb.bind(this);
       if (this.loadedCards < this.cardAmount) {
         const index = this.loadedCards;
         let card = this.cards[index];
@@ -118,6 +122,7 @@ define([
         this.loadedCards++;
       } else {
         this.state = "readyToClick";
+        cb();
       }
     },
     createCards: function(amount) {
@@ -146,6 +151,7 @@ define([
         if (this.activeCards.length < 2 && this.state === "readyToClick") {
           card.setToVisible();
           this.activeCards.push(card);
+          Stats.increaseClicks();
 
           if (this.activeCards.length === 2) {
             this.state = "notReadyToClick";
@@ -195,6 +201,7 @@ define([
       if (this.checkIfSame(this.activeCards[0], this.activeCards[1])) {
         this.foundCards.push(this.activeCards[0]);
         this.foundCards.push(this.activeCards[1]);
+        Stats.increaseScore();
         this.activeCards = [];
         this.state = "readyToClick";
         this.checkIfWon();
