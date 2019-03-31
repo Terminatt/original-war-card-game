@@ -115,7 +115,7 @@ define([
 
         this.animateWithClassRemove(
           card.domElement,
-          "deck__cardContainer--hidden",
+          "gameContainer__cardContainer--hidden",
           "anHandingOutCard",
           "cardReady"
         );
@@ -166,8 +166,7 @@ define([
         .appendChild(cardDomElement);
     },
     appendCards: function() {
-      const length = this.cards.length;
-      for (i = 0; i < length; i++) {
+      for (i = 0; i < this.cards.length; i++) {
         this.appendToDeck(this.cards[i].domElement);
       }
     },

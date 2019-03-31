@@ -75,7 +75,7 @@ body {
   border-radius: 10px;
 }
 
-.midMostContainer {
+.gameContainer__midMostContainer {
   width: 300px;
   height: 430px;
 
@@ -86,13 +86,13 @@ body {
 
   background-color: #8c8663;
 }
-.midMostContainer--border {
+.gameContainer__midMostContainer--border {
   border-style: solid;
   border-width: 2px;
   border-color: black;
   border-radius: 10px;
 }
-.midMostContainer__btn {
+.gameContainer__btn {
   display: block;
   font-family: "original_war_menufont";
   font-size: 1.2rem;
@@ -111,10 +111,10 @@ body {
   border-color: black;
   border-radius: 10px;
 }
-.midMostContainer__btn:active {
+.gameContainer__btn:active {
   transform: translateY(5px);
 }
-.midMostContainer__btn:focus {
+.gameContainer__btn:focus {
   outline: none;
 }
 .gameContainer__deck,
@@ -139,7 +139,7 @@ body {
   border-width: 2px;
   border-radius: 10px;
 }
-.deck__cardContainer {
+.gameContainer__cardContainer {
   width: 150px;
   height: 100px;
   cursor: pointer;
@@ -148,14 +148,14 @@ body {
   margin-left: 43px;
   z-index: 4;
 }
-.cardContainer__card {
+.gameContainer__card {
   position: absolute;
   width: 100%;
   height: 100%;
   transform-style: preserve-3d;
   transition: all 0.5s ease;
 }
-.cardContainer__card--clicked {
+.gameContainer__card--clicked {
   transform: rotateY(180deg);
 }
 .card__front {
@@ -185,7 +185,7 @@ body {
 .gameContainer__deck--invisible {
   display: none;
 }
-.deck__cardContainer--hidden {
+.gameContainer__cardContainer--hidden {
   visibility: hidden;
 }
 /*############### BACKGROUNDS ###############*/
@@ -295,11 +295,5 @@ body {
     height: 600px;
 
     transform: translate(-50%, -50%);
-  }
-  .deck__card {
-    width: 130px;
-    height: 80px;
-
-    margin-left: 50px;
   }
 }
