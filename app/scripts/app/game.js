@@ -19,7 +19,7 @@ define([
       this.attachListenerBtn16();
     },
     attachListenerBtn16: function() {
-      document.querySelector("#btnCards_16").addEventListener("click", () => {
+      document.querySelector("#cards16").addEventListener("click", () => {
         this.cardAmount = 16;
         this.startGame();
       });
