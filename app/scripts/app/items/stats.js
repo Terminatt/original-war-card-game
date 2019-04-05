@@ -25,7 +25,7 @@ define(() => {
     startTimer: function() {
       intervalId = setInterval(() => {
         time++;
-        infoContainer.querySelector(".infoContainer__time").innerHTML = time;
+        infoContainer.querySelector("#time").innerHTML = time;
       }, 1000);
     },
     stopTimer: function() {
@@ -33,11 +33,11 @@ define(() => {
     },
     increaseScore: function() {
       score += 100;
-      infoContainer.querySelector(".infoContainer__score").innerHTML = score;
+      infoContainer.querySelector("#score").innerHTML = score;
     },
     increaseClicks: function() {
       clicks++;
-      infoContainer.querySelector(".infoContainer__clicks").innerHTML = clicks;
+      infoContainer.querySelector("#clicks").innerHTML = clicks;
     }
   };
 });
