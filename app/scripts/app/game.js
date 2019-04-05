@@ -1,9 +1,8 @@
 define([
   "./items/card.js",
-  "./items/animations.js",
   "./items/dynamic-background.js",
   "./items/stats.js"
-], (Card, Animation, DBackground, Stats) => {
+], (Card, DBackground, Stats) => {
   return {
     state: "loading",
     cards: [],
@@ -39,9 +38,16 @@ define([
         element.removeEventListener("animationend", () => {});
       });
     },
+    addAnimationWithClassDelete: function(element, classToRemove, classToAdd) {
+      element.classList.remove(classToRemove);
+      element.classList.add(classToAdd);
+    },
+    addAnimation: function(element, classToAdd) {
+      element.classList.add(classToAdd);
+    },
     animate: function(element, cssClassAnimationName, stateChange) {
       this.addListenerToAnimEnd(element, stateChange, this.listenToStateChange);
-      Animation.addAnimation(element, cssClassAnimationName);
+      this.addAnimation(element, cssClassAnimationName);
     },
     animateWithClassRemove: function(
       element,
@@ -50,7 +56,7 @@ define([
       stateChange
     ) {
       this.addListenerToAnimEnd(element, stateChange, this.listenToStateChange);
-      Animation.addAnimationWithClassDelete(
+      this.addAnimationWithClassDelete(
         element,
         cssClassToRemove,
         cssClassAnimationName
