@@ -206,6 +206,71 @@ body {
   z-index: 0;
 }
 
+.winBox,
+.winBoxTransparent {
+  width: 60%;
+  height: 60%;
+
+  position: absolute;
+  top: 55%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50px;
+}
+.winBox {
+  background-color: black;
+  opacity: 0.5;
+  z-index: 5;
+}
+.winBoxTransparent {
+  font-family: "original_war_-_zoneregular";
+  text-align: center;
+  z-index: 10;
+  color: red;
+  font-size: 20px;
+}
+.winBoxTransparent__header {
+  margin-top: 10px;
+}
+.winBoxTransparent__gameSummary {
+  border-radius: 50px;
+  background-color: green;
+  width: 100%;
+  height: 100%;
+  display: flex;
+}
+.winBoxTransparent__stats,
+.winBoxTransparent__empty,
+.winBoxTransparent__ranks {
+  width: 33%;
+  height: 80%;
+  margin-top: 50px;
+}
+.winBoxTransparent__stats {
+  margin-left: 10px;
+  background-color: pink;
+}
+.winBoxTransparent__empty {
+  position: relative;
+}
+.winBoxTransparent__inputContainer {
+  width: 100%;
+  height: 30%;
+  position: absolute;
+  bottom: 0;
+  background-color: purple;
+}
+.winBoxTransparent__ranks {
+  margin-right: 10px;
+  background-color: wheat;
+}
+.winBoxTransparent__score,
+.winBoxTransparent__time,
+.winBoxTransparent__clicks {
+  text-align: left;
+  margin-top: 40px;
+  margin-left: 5px;
+}
 /*############### FONTS ###############*/
 @font-face {
   font-family: "original_war_-_zoneregular";
@@ -296,4 +361,8 @@ body {
 
     transform: translate(-50%, -50%);
   }
+}
+
+.dupa {
+  display: none;
 }
