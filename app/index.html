@@ -46,16 +46,23 @@
     <div class="winBoxTransparent">
       <h2 class="winBoxTransparent__header">YOU HAVE WON THE GAME</h2>
       <div class="winBoxTransparent__gameSummary">
-        <div class="winBoxTransparent__stats">
-          <h4 class="winBoxTransparent__statsTitle">GAME SUMMARY</h4>
-          <div class="winBoxTransparent__score">SCORE: 1000</div>
-          <div class="winBoxTransparent__time">TIME: 1000</div>
-          <div class="winBoxTransparent__clicks">CLICKS: 1000</div>
+        <div class="winBoxTransparent__statsContainer">
+          <h3 class="winBoxTransparent__statsTitle">GAME SUMMARY</h3>
+          <div class="winBoxTransparent__stats">
+            <div class="winBoxTransparent__score">SCORE: 1000</div>
+            <div class="winBoxTransparent__time">TIME: 1000</div>
+            <div class="winBoxTransparent__clicks">CLICKS: 1000</div>
+          </div>
         </div>
         <div class="winBoxTransparent__empty">
-          <div class="winBoxTransparent__inputContainer"></div>
+          <div class="winBoxTransparent__inputContainer">
+            <h5>TYPE YOUR NICKNAME</h5>
+            <input id="nickname" class="winBoxTransparent__nickname" />
+          </div>
         </div>
-        <div class="winBoxTransparent__ranks"></div>
+        <div class="winBoxTransparent__ranks">
+          YOU ARE 1# IN THE RANKING
+        </div>
       </div>
     </div>
     <script data-main="./scripts/main.js" src="./scripts/require.js"></script>
