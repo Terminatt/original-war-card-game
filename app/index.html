@@ -44,21 +44,23 @@
     <div class="backgroundRear"></div>
     <div class="winBox"></div>
     <div class="winBoxTransparent">
-      <h2 class="winBoxTransparent__header">YOU HAVE WON THE GAME</h2>
       <div class="winBoxTransparent__gameSummary">
         <div class="winBoxTransparent__statsContainer">
-          <h3 class="winBoxTransparent__statsTitle">GAME SUMMARY</h3>
-          <div class="winBoxTransparent__stats">
+          <h2 class="winBoxTransparent__statsTitle anAppearFromLeft">
+            GAME SUMMARY
+          </h2>
+          <div class="winBoxTransparent__stats anAppear">
             <div class="winBoxTransparent__score">SCORE: 1000</div>
             <div class="winBoxTransparent__time">TIME: 1000</div>
             <div class="winBoxTransparent__clicks">CLICKS: 1000</div>
           </div>
         </div>
-        <div class="winBoxTransparent__empty">
-          <div class="winBoxTransparent__inputContainer">
-            <h5>TYPE YOUR NICKNAME</h5>
-            <input id="nickname" class="winBoxTransparent__nickname" />
-          </div>
+        <div class="winBoxTransparent__inputContainer">
+          <label for="inp" class="winBoxTransparent__inp">
+            <input id="inp" type="text" class="winBoxTransparent__input" />
+            <span class="winBoxTransparent__label">NICKNAME</span>
+            <span class="winBoxTransparent__border"></span>
+          </label>
         </div>
         <div class="winBoxTransparent__ranks">
           YOU ARE 1# IN THE RANKING
