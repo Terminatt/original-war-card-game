@@ -235,8 +235,9 @@ body {
 .winBoxTransparent__stats {
   width: 100%;
   margin-top: 20px;
+  margin-bottom: 20px;
 }
-.winBoxTransparent__statsContainer {
+.winBoxTransparent__titleContainer {
   margin-left: 10px;
   border-radius: 20px;
   margin-bottom: 20px;
@@ -280,7 +281,7 @@ body {
   padding: 12px 0;
   height: 48px;
   font-size: 16px;
-  border-bottom: 2px solid #c8ccd4;
+  border-bottom: 2px solid blue;
   background: none;
   border-radius: 0;
   color: blue;
