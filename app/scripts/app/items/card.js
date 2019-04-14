@@ -32,6 +32,10 @@ define(() => {
     ).style.backgroundImage = `url('${this.imageUrl}')`;
   };
 
+  Card.prototype.getCardState = function() {
+    return this.cardState;
+  };
+
   return {
     createCard: function() {
       const cardDomElementContainer = this.createDomElement();

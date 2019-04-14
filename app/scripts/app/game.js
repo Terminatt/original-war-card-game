@@ -152,6 +152,10 @@ define([
     },
     addListenerToCard: function(card) {
       card.domElement.addEventListener("click", () => {
+        if (card.getCardState() === "visible") {
+          return;
+        }
+
         if (this.activeCards.length < 2 && this.state === "readyToClick") {
           card.setToVisible();
           this.activeCards.push(card);
