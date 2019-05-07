@@ -17,6 +17,9 @@ define([
     },
     attachListeners: function() {
       this.attachListenerBtn16();
+      document.querySelector(".winButton").addEventListener("click", () => {
+        this.winGame();
+      });
     },
     attachListenerBtn16: function() {
       document.querySelector("#cards16").addEventListener("click", () => {
@@ -79,6 +82,9 @@ define([
         case "readyToClick":
           Stats.startTimer();
           break;
+        case "scoreBoardReady":
+          this.onScoreBoardReady();
+          break;
       }
     },
     onMenuHiding: function() {
@@ -128,6 +134,12 @@ define([
         this.state = "readyToClick";
         cb();
       }
+    },
+    onScoreBoardReady: function() {
+      const winBox = document.querySelector(".winBoxTransparent");
+      winBox.classList.remove("winBoxTransparent--invisible");
+      Stats.stopTimer();
+      DBackground.stopBackGroundAnimations();
     },
     createCards: function(amount) {
       // the amount must be divided by two so that only 8/16/32 unique cards will be created
@@ -223,7 +235,7 @@ define([
     },
     checkIfWon: function() {
       if (this.cardAmount === this.foundCards.length) {
-        console.log("You Won");
+        this.onWonGame();
       }
     },
     showInfoMenu: function() {
@@ -235,6 +247,20 @@ define([
       document
         .querySelector(".infoContainer")
         .classList.add("infoContainer--hidden");
+    },
+    winGame: function() {
+      this.cardAmount = 0;
+
+      this.checkIfWon();
+    },
+    onWonGame: function() {
+      const transparentDeck = document.querySelector(
+          ".gameContainer__transparentDeck"
+        ),
+        deck = document.querySelector(".gameContainer__deck");
+
+      this.addAnimation(transparentDeck, "anScaleDown");
+      this.animate(deck, "anScaleDown", "scoreBoardReady");
     }
   };
 });
