@@ -87,6 +87,45 @@ define([
         case "scoreBoardReady":
           this.onScoreBoardReady();
           break;
+        case "scoreBoardLoaded":
+          this.onScoreBoardLoaded();
+          break;
+        case "titleLoaded":
+          this.onElementLoaded(
+            ".winBoxTransparent__score",
+            Stats.getScore,
+            "SCORE",
+            "anAppear",
+            "scoreLoaded"
+          );
+          break;
+        case "scoreLoaded":
+          this.onElementLoaded(
+            ".winBoxTransparent__time",
+            Stats.getScore,
+            "TIME",
+            "anAppear",
+            "timeLoaded"
+          );
+          break;
+        case "timeLoaded":
+          this.onElementLoaded(
+            ".winBoxTransparent__clicks",
+            Stats.getTime,
+            "CLICKS",
+            "anAppear",
+            "clicksLoaded"
+          );
+          break;
+        case "clicksLoaded":
+          this.onElementLoaded(
+            ".winBoxTransparent__clicks",
+            Stats.getClicks,
+            "CLICKS",
+            "anAppear",
+            "clicksLoaded"
+          );
+          break;
       }
     },
     onMenuHiding: function() {
@@ -140,6 +179,23 @@ define([
     onScoreBoardReady: function() {
       const winBox = document.querySelector(".winBoxTransparent");
       winBox.classList.remove("winBoxTransparent--invisible");
+      this.animate(winBox, "anAppearCentered", "scoreBoardLoaded");
+    },
+    onScoreBoardLoaded: function() {
+      const winBoxTitle = document.querySelector(
+        ".winBoxTransparent__statsTitle"
+      );
+      winBoxTitle.classList.remove("winBoxTransparent--invisibility");
+      this.animate(winBoxTitle, "anAppearFromRight", "titleLoaded");
+    },
+    onElementLoaded: function(elClass, getter, text, animation, state) {
+      const element = document.querySelector(elClass);
+      if (text) {
+        const value = getter();
+        element.innerHTML = `${text}: ${value}`;
+      }
+      element.classList.remove("winBoxTransparent--invisibility");
+      this.animate(element, animation, state);
     },
     createCards: function(amount) {
       // the amount must be divided by two so that only 8/16/32 unique cards will be created
