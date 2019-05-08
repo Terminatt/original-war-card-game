@@ -34,12 +34,13 @@ define([
       DBackground.dynamicallyChangeBackground();
     },
     addListenerToAnimEnd: function(element, stateChange, cb) {
-      element.addEventListener("animationend", () => {
+      let onAnimationEnd = () => {
         cb = cb.bind(this);
         this.state = stateChange;
         cb();
-        element.removeEventListener("animationend", () => {});
-      });
+        element.removeEventListener("animationend", onAnimationEnd);
+      };
+      element.addEventListener("animationend", onAnimationEnd);
     },
     addAnimationWithClassDelete: function(element, classToRemove, classToAdd) {
       element.classList.remove(classToRemove);
@@ -66,6 +67,7 @@ define([
       );
     },
     listenToStateChange: function() {
+      console.log(this.state);
       switch (this.state) {
         case "menuHiding":
           this.onMenuHiding();
@@ -138,8 +140,6 @@ define([
     onScoreBoardReady: function() {
       const winBox = document.querySelector(".winBoxTransparent");
       winBox.classList.remove("winBoxTransparent--invisible");
-      Stats.stopTimer();
-      DBackground.stopBackGroundAnimations();
     },
     createCards: function(amount) {
       // the amount must be divided by two so that only 8/16/32 unique cards will be created
@@ -261,6 +261,8 @@ define([
 
       this.addAnimation(transparentDeck, "anScaleDown");
       this.animate(deck, "anScaleDown", "scoreBoardReady");
+      Stats.stopTimer();
+      DBackground.stopBackgroundAnimations();
     }
   };
 });

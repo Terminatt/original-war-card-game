@@ -3,7 +3,7 @@ define(() => {
   let time = 0;
   let score = 0;
   let clicks = 0;
-  let intervalId = null;
+  let intervalId;
 
   return {
     getTime: function() {
