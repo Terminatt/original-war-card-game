@@ -85,10 +85,22 @@ define([
           Stats.startTimer();
           break;
         case "scoreBoardReady":
-          this.onScoreBoardReady();
+          this.onElementLoaded(
+            ".winBoxTransparent",
+            null,
+            null,
+            "anAppearCentered",
+            "scoreBoardLoaded"
+          );
           break;
         case "scoreBoardLoaded":
-          this.onScoreBoardLoaded();
+          this.onElementLoaded(
+            ".winBoxTransparent__statsTitle",
+            null,
+            null,
+            "anAppearFromRight",
+            "titleLoaded"
+          );
           break;
         case "titleLoaded":
           this.onElementLoaded(
@@ -102,7 +114,7 @@ define([
         case "scoreLoaded":
           this.onElementLoaded(
             ".winBoxTransparent__time",
-            Stats.getScore,
+            Stats.getTime,
             "TIME",
             "anAppear",
             "timeLoaded"
@@ -111,7 +123,7 @@ define([
         case "timeLoaded":
           this.onElementLoaded(
             ".winBoxTransparent__clicks",
-            Stats.getTime,
+            Stats.getClicks,
             "CLICKS",
             "anAppear",
             "clicksLoaded"
@@ -119,11 +131,11 @@ define([
           break;
         case "clicksLoaded":
           this.onElementLoaded(
-            ".winBoxTransparent__clicks",
-            Stats.getClicks,
-            "CLICKS",
-            "anAppear",
-            "clicksLoaded"
+            ".winBoxTransparent__inputContainer",
+            null,
+            null,
+            "anAppearCentered",
+            "inputLoaded"
           );
           break;
       }
@@ -176,18 +188,6 @@ define([
         cb();
       }
     },
-    onScoreBoardReady: function() {
-      const winBox = document.querySelector(".winBoxTransparent");
-      winBox.classList.remove("winBoxTransparent--invisible");
-      this.animate(winBox, "anAppearCentered", "scoreBoardLoaded");
-    },
-    onScoreBoardLoaded: function() {
-      const winBoxTitle = document.querySelector(
-        ".winBoxTransparent__statsTitle"
-      );
-      winBoxTitle.classList.remove("winBoxTransparent--invisibility");
-      this.animate(winBoxTitle, "anAppearFromRight", "titleLoaded");
-    },
     onElementLoaded: function(elClass, getter, text, animation, state) {
       const element = document.querySelector(elClass);
       if (text) {
@@ -195,6 +195,7 @@ define([
         element.innerHTML = `${text}: ${value}`;
       }
       element.classList.remove("winBoxTransparent--invisibility");
+      element.classList.remove("winBoxTransparent--invisible");
       this.animate(element, animation, state);
     },
     createCards: function(amount) {
@@ -314,11 +315,11 @@ define([
           ".gameContainer__transparentDeck"
         ),
         deck = document.querySelector(".gameContainer__deck");
+      Stats.stopTimer();
+      DBackground.stopBackgroundAnimations();
 
       this.addAnimation(transparentDeck, "anScaleDown");
       this.animate(deck, "anScaleDown", "scoreBoardReady");
-      Stats.stopTimer();
-      DBackground.stopBackgroundAnimations();
     }
   };
 });

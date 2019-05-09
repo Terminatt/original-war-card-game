@@ -369,7 +369,7 @@ body {
 .anAppear {
   animation-name: appear;
   animation-duration: 1s;
-  animation-fill-mode: backwards;
+  animation-fill-mode: forwards;
 }
 .anAppearFromLeft {
   animation-name: appear-from-left;
