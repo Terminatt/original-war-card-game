@@ -18,6 +18,7 @@ define([
     attachListeners: function () {
       this.attachListenerBtn16();
       this.attachListenerToInps();
+      this.attachListenerToWinBoxBtn();
       document.querySelector(".winButton").addEventListener("click", () => {
         this.winGame();
       });
@@ -30,7 +31,6 @@ define([
     },
     attachListenerToInps: function () {
       document.querySelectorAll(".winBoxTransparent__input").forEach((el) => {
-        console.log(el);
         el.addEventListener("input", (event) => {
           if (!event.target.classList.contains("winBoxTransparent__input--filled") && event.target.value !== "") {
             el.classList.add("winBoxTransparent__input--filled");
@@ -38,6 +38,15 @@ define([
             el.classList.remove("winBoxTransparent__input--filled");
           }
         })
+      })
+    },
+    attachListenerToWinBoxBtn: function () {
+      document.querySelector(".winBoxTransparent__btn").addEventListener("click", (event) => {
+        const value = document.querySelector(".winBoxTransparent__input").value;
+        if (this.state === "waitingToSave") {
+          const ranks = document.querySelector(".winBoxTransparent__ranks");
+          this.animateWithClassRemove(ranks, "winBoxTransparent--invisibility", "anAppear", "scoreSaved");
+        }
       })
     },
     startGame: function () {
@@ -80,7 +89,6 @@ define([
       );
     },
     listenToStateChange: function () {
-      console.log(this.state);
       switch (this.state) {
         case "menuHiding":
           this.onMenuHiding();
@@ -148,7 +156,7 @@ define([
             null,
             null,
             "anAppearCentered",
-            "inputLoaded"
+            "waitingToSave"
           );
           break;
       }

@@ -287,10 +287,10 @@ a {
   padding: 12px 0;
   height: 48px;
   font-size: 16px;
-  border-bottom: 2px solid blue;
+  border-bottom: 2px solid #07f;
   background: none;
   border-radius: 0;
-  color: blue;
+  color: #07f;
   transition: all 0.15s ease;
   text-transform: uppercase;
 }
@@ -298,7 +298,7 @@ a {
   background: rgba(34, 50, 84, 0.03);
 }
 .winBoxTransparent__input:not(:placeholder-shown) + span {
-  color: blue;
+  color: #07f;
   transform: translateY(-26px);
   transform: scale(0.75);
 }
@@ -328,6 +328,10 @@ a {
 }
 .btn {
   cursor: pointer;
+  background-color: #07f;
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
 }
 .winBoxTransparent__btn {
   display: inline-block;
