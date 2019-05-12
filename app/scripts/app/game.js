@@ -11,29 +11,42 @@ define([
     cardAmount: 0,
     loadedCards: 0,
 
-    init: function() {
+    init: function () {
       DBackground.setMainMenuBackground();
       this.attachListeners();
     },
-    attachListeners: function() {
+    attachListeners: function () {
       this.attachListenerBtn16();
+      this.attachListenerToInps();
       document.querySelector(".winButton").addEventListener("click", () => {
         this.winGame();
       });
     },
-    attachListenerBtn16: function() {
+    attachListenerBtn16: function () {
       document.querySelector("#cards16").addEventListener("click", () => {
         this.cardAmount = 16;
         this.startGame();
       });
     },
-    startGame: function() {
+    attachListenerToInps: function () {
+      document.querySelectorAll(".winBoxTransparent__input").forEach((el) => {
+        console.log(el);
+        el.addEventListener("input", (event) => {
+          if (!event.target.classList.contains("winBoxTransparent__input--filled") && event.target.value !== "") {
+            el.classList.add("winBoxTransparent__input--filled");
+          } else if (event.target.value === "") {
+            el.classList.remove("winBoxTransparent__input--filled");
+          }
+        })
+      })
+    },
+    startGame: function () {
       const mainMenu = document.querySelector(".gameContainer__mainMenu");
       this.showInfoMenu();
       this.animate(mainMenu, "anFadeAway", "menuHiding");
       DBackground.dynamicallyChangeBackground();
     },
-    addListenerToAnimEnd: function(element, stateChange, cb) {
+    addListenerToAnimEnd: function (element, stateChange, cb) {
       let onAnimationEnd = () => {
         cb = cb.bind(this);
         this.state = stateChange;
@@ -42,18 +55,18 @@ define([
       };
       element.addEventListener("animationend", onAnimationEnd);
     },
-    addAnimationWithClassDelete: function(element, classToRemove, classToAdd) {
+    addAnimationWithClassDelete: function (element, classToRemove, classToAdd) {
       element.classList.remove(classToRemove);
       element.classList.add(classToAdd);
     },
-    addAnimation: function(element, classToAdd) {
+    addAnimation: function (element, classToAdd) {
       element.classList.add(classToAdd);
     },
-    animate: function(element, cssClassAnimationName, stateChange) {
+    animate: function (element, cssClassAnimationName, stateChange) {
       this.addListenerToAnimEnd(element, stateChange, this.listenToStateChange);
       this.addAnimation(element, cssClassAnimationName);
     },
-    animateWithClassRemove: function(
+    animateWithClassRemove: function (
       element,
       cssClassToRemove,
       cssClassAnimationName,
@@ -66,7 +79,7 @@ define([
         cssClassAnimationName
       );
     },
-    listenToStateChange: function() {
+    listenToStateChange: function () {
       console.log(this.state);
       switch (this.state) {
         case "menuHiding":
@@ -140,7 +153,7 @@ define([
           break;
       }
     },
-    onMenuHiding: function() {
+    onMenuHiding: function () {
       const transparentDeck = document.querySelector(
         ".gameContainer__transparentDeck"
       );
@@ -151,14 +164,14 @@ define([
         "transparentDeckLoaded"
       );
     },
-    onTransparentDeckLoaded: function(cb) {
+    onTransparentDeckLoaded: function (cb) {
       cb = cb.bind(this);
       const deck = document.querySelector(".gameContainer__deck");
       deck.classList.remove("gameContainer__deck--invisible");
       this.state = "deckLoaded";
       cb();
     },
-    onDeckLoaded: function(cb) {
+    onDeckLoaded: function (cb) {
       cb = cb.bind(this);
       this.createCards(this.cardAmount);
       this.setImagesToCards();
@@ -169,7 +182,7 @@ define([
       this.state = "cardReady";
       cb();
     },
-    onCardReady: function(cb) {
+    onCardReady: function (cb) {
       cb = cb.bind(this);
       if (this.loadedCards < this.cardAmount) {
         const index = this.loadedCards;
@@ -188,7 +201,7 @@ define([
         cb();
       }
     },
-    onElementLoaded: function(elClass, getter, text, animation, state) {
+    onElementLoaded: function (elClass, getter, text, animation, state) {
       const element = document.querySelector(elClass);
       if (text) {
         const value = getter();
@@ -198,7 +211,7 @@ define([
       element.classList.remove("winBoxTransparent--invisible");
       this.animate(element, animation, state);
     },
-    createCards: function(amount) {
+    createCards: function (amount) {
       // the amount must be divided by two so that only 8/16/32 unique cards will be created
       amount = amount / 2;
       for (let i = 0; i < amount; i++) {
@@ -207,7 +220,7 @@ define([
         this.cards.push(card);
       }
     },
-    cloneCards: function() {
+    cloneCards: function () {
       const length = this.cards.length;
       for (let i = 0; i < length; i++) {
         let card = Card.createCard();
@@ -219,7 +232,7 @@ define([
         this.cards.push(card);
       }
     },
-    addListenerToCard: function(card) {
+    addListenerToCard: function (card) {
       card.domElement.addEventListener("click", () => {
         if (card.getCardState() === "visible") {
           return;
@@ -237,17 +250,17 @@ define([
         }
       });
     },
-    appendToDeck: function(cardDomElement) {
+    appendToDeck: function (cardDomElement) {
       document
         .querySelector(".gameContainer__deck")
         .appendChild(cardDomElement);
     },
-    appendCards: function() {
+    appendCards: function () {
       for (i = 0; i < this.cards.length; i++) {
         this.appendToDeck(this.cards[i].domElement);
       }
     },
-    shuffleArray: function(array) {
+    shuffleArray: function (array) {
       for (let i = array.length - 1; i > 0; i--) {
         let j = Math.floor(Math.random() * (i + 1));
         let temp = array[i];
@@ -256,24 +269,24 @@ define([
       }
       return array;
     },
-    setImagesToCards: function() {
+    setImagesToCards: function () {
       for (let i = 0; i < this.cards.length; i++) {
         this.cards[i].setImageUrl(i);
       }
     },
-    setBackgroundStylesToCards: function() {
+    setBackgroundStylesToCards: function () {
       for (let i = 0; i < this.cards.length; i++) {
         this.cards[i].setBackgroundStyle();
       }
     },
-    checkIfSame: function(firstCard, secondCard) {
+    checkIfSame: function (firstCard, secondCard) {
       if (firstCard.id.localeCompare(secondCard.id) === 0) {
         return true;
       } else {
         return false;
       }
     },
-    compareCards: function() {
+    compareCards: function () {
       if (this.checkIfSame(this.activeCards[0], this.activeCards[1])) {
         this.foundCards.push(this.activeCards[0]);
         this.foundCards.push(this.activeCards[1]);
@@ -290,30 +303,30 @@ define([
         }, 1000);
       }
     },
-    checkIfWon: function() {
+    checkIfWon: function () {
       if (this.cardAmount === this.foundCards.length) {
         this.onWonGame();
       }
     },
-    showInfoMenu: function() {
+    showInfoMenu: function () {
       document
         .querySelector(".infoContainer")
         .classList.remove("infoContainer--hidden");
     },
-    hideInfoMenu: function() {
+    hideInfoMenu: function () {
       document
         .querySelector(".infoContainer")
         .classList.add("infoContainer--hidden");
     },
-    winGame: function() {
+    winGame: function () {
       this.cardAmount = 0;
 
       this.checkIfWon();
     },
-    onWonGame: function() {
+    onWonGame: function () {
       const transparentDeck = document.querySelector(
-          ".gameContainer__transparentDeck"
-        ),
+        ".gameContainer__transparentDeck"
+      ),
         deck = document.querySelector(".gameContainer__deck");
       Stats.stopTimer();
       DBackground.stopBackgroundAnimations();

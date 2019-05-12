@@ -15,6 +15,9 @@ body {
   flex-wrap: wrap;
   position: relative;
 }
+a {
+  text-decoration: none;
+}
 /*############### ClASSES ############### */
 .infoContainer {
   position: fixed;
@@ -121,7 +124,7 @@ body {
 }
 .gameContainer__deck,
 .gameContainer__transparentDeck {
-  width: 60%;
+  width: 45%;
   height: 700px;
   z-index: 2;
 
@@ -310,6 +313,31 @@ body {
 }
 .winBoxTransparent__input:focus + span + .border {
   transform: scaleX(1);
+}
+.winBoxTransparent__input--filled {
+  background: none;
+  outline: none;
+  border-color: #07f;
+}
+.winBoxTransparent__input--filled + span {
+  color: #07f !important;
+  transform: translateY(-26px) scale(0.6) !important;
+}
+.winBoxTransparent__input--filled + span + .border {
+  transform: scaleX(1) !important;
+}
+.btn {
+  cursor: pointer;
+}
+.winBoxTransparent__btn {
+  display: inline-block;
+  margin-left: 10px;
+}
+.btn:active {
+  transform: translateY(10px);
+}
+.winBoxTransparent__btn:visited {
+ color: blue;
 }
 .winBoxTransparent__statsTitle {
   margin-top: 20px;

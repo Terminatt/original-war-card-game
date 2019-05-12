@@ -1,86 +1,79 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <title>Original War Card Game</title>
-    <meta charset="utf-8" />
-    <meta name="author" content="Ernest Rudnicki" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" type="text/css" href="./css/styles.css" />
-  </head>
 
-  <body>
-    <div class="infoContainer infoContainer--hidden">
-      <div class="infoContainer__border"></div>
-      <span>ORIGINAL WAR CARDS</span>
-      <div class="infoContainer__timerBox">TIME: <span id="time">0</span></div>
-      <div class="infoContainer__scoreBox">
-        SCORE: <span id="score">0</span>
-      </div>
-      <div class="infoContainer__clicksBox">
-        CLICKS: <span id="clicks">0</span>
-      </div>
-      <button class="winButton">Win Button</button>
+<head>
+  <title>Original War Card Game</title>
+  <meta charset="utf-8" />
+  <meta name="author" content="Ernest Rudnicki" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" type="text/css" href="./css/styles.css" />
+</head>
+
+<body>
+  <div class="infoContainer infoContainer--hidden">
+    <div class="infoContainer__border"></div>
+    <span>ORIGINAL WAR CARDS</span>
+    <div class="infoContainer__timerBox">TIME: <span id="time">0</span></div>
+    <div class="infoContainer__scoreBox">
+      SCORE: <span id="score">0</span>
     </div>
-    <div class="gameContainer">
-      <div class="gameContainer__mainMenu gameContainer__mainMenu--border">
-        <div
-          class="gameContainer__midMostContainer gameContainer__midMostContainer--border"
-        >
-          <button class="gameContainer__btn">64 karty</button>
-          <button class="gameContainer__btn">32 karty</button>
-          <button id="cards16" class="gameContainer__btn">
-            16 kart
-          </button>
-          <button class="gameContainer__btn">Autor</button>
-          <button class="gameContainer__btn">Tablica wyników</button>
-          <button class="gameContainer__btn">Najlepsi gracze</button>
-        </div>
-      </div>
-      <div
-        class="gameContainer__transparentDeck gameContainer__transparentDeck--invisible"
-      ></div>
-      <div class="gameContainer__deck gameContainer__deck--invisible"></div>
+    <div class="infoContainer__clicksBox">
+      CLICKS: <span id="clicks">0</span>
     </div>
-    <div class="backgroundFront"></div>
-    <div class="backgroundRear"></div>
-    <div class="winBoxTransparent winBoxTransparent--invisible">
-      <div class="winBoxTransparent__gameSummary">
-        <div class="winBoxTransparent_titleContainer">
-          <h2
-            class="winBoxTransparent__statsTitle winBoxTransparent--invisibility"
-          >
-            GAME SUMMARY
-          </h2>
-        </div>
-        <hr />
-        <div class="winBoxTransparent__stats anAppear">
-          <div class="winBoxTransparent__score winBoxTransparent--invisibility">
-            SCORE: 1000
-          </div>
-          <div class="winBoxTransparent__time winBoxTransparent--invisibility">
-            TIME: 1000
-          </div>
-          <div
-            class="winBoxTransparent__clicks winBoxTransparent--invisibility"
-          >
-            CLICKS: 1000
-          </div>
-        </div>
-        <hr />
-        <div
-          class="winBoxTransparent__inputContainer winBoxTransparent--invisibility"
-        >
-          <label for="inp" class="winBoxTransparent__inp">
-            <input id="inp" type="text" class="winBoxTransparent__input" />
-            <span class="winBoxTransparent__label">NICKNAME</span>
-            <span class="winBoxTransparent__border"></span>
-          </label>
-        </div>
-        <div class="winBoxTransparent__ranks winBoxTransparent--invisibility">
-          YOU ARE 1# IN THE RANKING
-        </div>
+    <button class="winButton">Win Button</button>
+  </div>
+  <div class="gameContainer">
+    <div class="gameContainer__mainMenu gameContainer__mainMenu--border">
+      <div class="gameContainer__midMostContainer gameContainer__midMostContainer--border">
+        <button class="gameContainer__btn">64 karty</button>
+        <button class="gameContainer__btn">32 karty</button>
+        <button id="cards16" class="gameContainer__btn">
+          16 kart
+        </button>
+        <button class="gameContainer__btn">Autor</button>
+        <button class="gameContainer__btn">Tablica wyników</button>
+        <button class="gameContainer__btn">Najlepsi gracze</button>
       </div>
     </div>
-    <script data-main="./scripts/main.js" src="./scripts/require.js"></script>
-  </body>
+    <div class="gameContainer__transparentDeck gameContainer__transparentDeck--invisible"></div>
+    <div class="gameContainer__deck gameContainer__deck--invisible"></div>
+  </div>
+  <div class="backgroundFront"></div>
+  <div class="backgroundRear"></div>
+  <div class="winBoxTransparent winBoxTransparent--invisible">
+    <div class="winBoxTransparent__gameSummary">
+      <div class="winBoxTransparent_titleContainer">
+        <h2 class="winBoxTransparent__statsTitle winBoxTransparent--invisibility">
+          GAME SUMMARY
+        </h2>
+      </div>
+      <hr />
+      <div class="winBoxTransparent__stats anAppear">
+        <div class="winBoxTransparent__score winBoxTransparent--invisibility">
+          SCORE: 1000
+        </div>
+        <div class="winBoxTransparent__time winBoxTransparent--invisibility">
+          TIME: 1000
+        </div>
+        <div class="winBoxTransparent__clicks winBoxTransparent--invisibility">
+          CLICKS: 1000
+        </div>
+      </div>
+      <hr />
+      <div class="winBoxTransparent__inputContainer winBoxTransparent--invisibility">
+        <label for="inp" class="winBoxTransparent__inp">
+          <input id="inp" type="text" class="winBoxTransparent__input" />
+          <span class="winBoxTransparent__label">NICKNAME</span>
+          <span class="winBoxTransparent__border"></span>
+        </label>
+        <div class="btn btn-submit winBoxTransparent__btn">SUBMIT</div>
+      </div>
+      <div class="winBoxTransparent__ranks winBoxTransparent--invisibility">
+        YOU ARE 1# IN THE RANKING
+      </div>
+    </div>
+  </div>
+  <script data-main="./scripts/main.js" src="./scripts/require.js"></script>
+</body>
+
 </html>
