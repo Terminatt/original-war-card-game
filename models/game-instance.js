@@ -16,5 +16,5 @@ var GameInstanceSchema = new mongoose.Schema({
   }
 });
 
-var GameInstance = mongoose.model("User", GameInstance);
+var GameInstance = mongoose.model("GameInstance", GameInstance);
 module.exports = { GameInstance };
