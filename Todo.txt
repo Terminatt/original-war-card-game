@@ -1,0 +1,8 @@
+1. Stworzyć system autoryzacji danej gry:
+  - Podczas rozpoczęcia gry, klient wysyła request do backendu o wygenerowanie numeru instancji gry oraz tokenu autoryzacji
+  - W odpowiedzi backend wysyła token w pliku cookies, i zapisuje aktualnie numer instancji oraz token w bazie danych
+  - Po 20 minutach od rozpoczęcia gry, gdy nie ma informacji o tym że gra została zakończona, backend czyści informacje na temat tej instancji
+
+2. Stworzyć możliwość zapisywania wyniku danego gracza w bazie danych
+3. Stworzyć system filtrowania graczy (scoreboard) po stronie backendu
+4. Stworzyć paginacje po stronie klienta
